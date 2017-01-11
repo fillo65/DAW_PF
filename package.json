@@ -1,0 +1,19 @@
+{
+  "name": "dev",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node app"
+  },
+  "dependencies": {
+    "bluebird": "^3.4.7",
+    "body-parser": "1.15",
+    "ejs": "2.5",
+    "express": "4.x",
+    "method-override": "^2.3.7",
+    "mongoose": "4.7.4"
+  },
+  "devDependencies": {
+    "nodemon": "^1.11.0"
+  }
+}
