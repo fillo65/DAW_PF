@@ -1,12 +1,13 @@
 var Log = require('../model/log_model');
+var general = require("../general_settings");
 
 exports.new = function (req, res) {
-    res.render('log_new');
+    res.render('log_new', {title: general["logs"]["name"]});
 };
 exports.log_list = function (req, res) {
     Log.findAll().exec(function (err, logs) {
         if (!err) {
-            res.render('log', {logs: logs});
+            res.render('log', {logs: logs, title: general["logs"]["name"]});
         } else {
             console.log(err)
         }
@@ -39,7 +40,7 @@ exports.delete = function (req, res) {
 exports.findById = function (req, res) {
     Log.findById(req.params.id).exec(function (err, result) {
         if (!err) {
-            res.render('log_edit', {log: result});
+            res.render('log_edit', {log: result, title: general["logs"]["name"]});
         } else {
             console.log("err");
         }
