@@ -10,10 +10,17 @@
     "body-parser": "1.15",
     "ejs": "2.5",
     "express": "4.x",
+    "grunt": "^1.0.1",
     "method-override": "^2.3.7",
-    "mongoose": "4.7.4"
+    "mongoose": "4.7.4",
+    "nodemon": "^1.11.0"
   },
   "devDependencies": {
+    "grunt": "^1.0.1",
+    "grunt-contrib-sass": "^1.0.0",
+    "grunt-contrib-watch": "^1.0.0",
+    "grunt-sass": "^2.0.0",
+    "node-sass": "^4.5.0",
     "nodemon": "^1.11.0"
   }
 }
