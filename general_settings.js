@@ -19,7 +19,7 @@ var pages = {
       new:"Editar Aula",
       edit:"Añadir Aula"
     },
-    description: "Lista de Aulas",
+    description: "Lista de Aulass", 
     path: "/classrooms"
   },
   conferences:{
