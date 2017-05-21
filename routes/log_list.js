@@ -2,12 +2,12 @@ var Log = require('../model/log_model');
 var general = require("../general_settings");
 
 exports.new = function (req, res) {
-    res.render('log_new', {title: general["logs"]["name"]});
+    res.render('log_new', {});
 };
 exports.log_list = function (req, res) {
     Log.findAll().exec(function (err, logs) {
         if (!err) {
-            res.render('log', {logs: logs, title: general["logs"]["name"]});
+            res.render('log', {logs: logs});
         } else {
             console.log(err)
         }

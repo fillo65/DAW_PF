@@ -1,13 +1,31 @@
 <!DOCTYPE html>
-<html lang="en">
-    <% include includes/head.ejs %>
-    <body>
+<html>
+<% include includes/head.ejs %>
+<body>
+  <div class="container-fluid h-100 ctm--padding-0">
+    <div class="row h-100 ctm--margin-left-right-0">
+      <div class="w-100">
         <% include includes/header.ejs %>
-        <main>
-            <ul>
-              <li>login</li>
-            </ul>
-        </main>
-        <% include includes/footer.ejs %>
-    </body>
+      </div>
+      <% include includes/sidebar.ejs %>
+      <main class="col-xs-12 col-sm-12 col-md-9 col-lg-10">
+        <ul class="main__current_aulas">
+          <li class=""><a href="#"><img src="img/test.png" class="" alt=""/>Aula_example</a></li>
+          <li class=""><a href="#"><img src="img/test.png" class="" alt=""/>Aula_example</a></li>
+          <li class=""><a href="#"><img src="img/test.png" class="" alt=""/>Aula_example</a></li>
+          <li class=""><a href="#"><img src="img/test.png" class="" alt=""/>Aula_example</a></li>
+          <li class=""><a href="#"><img src="img/test.png" class="" alt=""/>Aula_example</a></li>
+        </ul>
+        <h2>calendar</h2>
+        <h2>Usuario Recientes</h2>
+        <ul class="main__recent_users">
+          <li><a href="#"><img src="img/user.png" class="" alt=""/>User_example</a></li>
+          <li><a href="#"><img src="img/user.png" class="" alt=""/>User_example</a></li>
+          <li><a href="#"><img src="img/user.png" class="" alt=""/>User_example</a></li>
+        </ul>
+      </main>
+      <% include includes/footer.ejs %>
+    </div>
+  </div>
+</body>
 </html>

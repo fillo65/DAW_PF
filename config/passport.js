@@ -17,7 +17,6 @@ module.exports = function(passport) {
     passReqToCallback : true // allows us to pass back the entire request to the callback
   },
   function(req, email, password, done) {
-    console.log(req.body);
     if(req.body.action == "login"){
       User.findOne({ 'email' :  email }, function(err, user) {
         if (err){
@@ -26,9 +25,7 @@ module.exports = function(passport) {
         if (!user){
           return done(null, false, req.flash('loginMessage', 'No user found.'));
         }
-        console.log(password);
         if (!user.validPassword(req.body.password)){
-          // console.log(password);
           return done(null, false, req.flash('loginMessage', 'Oops! Wrong password.'));
         }
         return done(null, user);
