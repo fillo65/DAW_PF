@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Login</title>
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Roboto" rel="stylesheet">
+  <link rel="stylesheet" href="css/login.css">
+  <link rel="stylesheet" href="faicons/css/font-awesome.min.css">
+</head>
+<body>
+  <div class="content_login flex">
+    <div class="box">
+      <span class="img"></span>
+      <div class="login">
+        <form action="/login" method="post">
+          <label><i class="fa fa-user" aria-hidden="true"></i> <input type="text" placeholder="Email" name="email" value=""></label>
+          <label><i class="fa fa-lock" aria-hidden="true"></i> <input type="password" placeholder="Password" name="password" value=""></label>
+          <button type="submit" name="action" value="login">Log in</button>
+        </form>
+      </div>
+      <div class="lostpassword">
+        <p>Recover Account</p>
+        <label><i class="fa fa-paper-plane" aria-hidden="true"></i><input type="Email" placeholder="example@domain.com" name="email" value=""></label>
+      </div>
+      <div class="register">
+        <form action="/login" method="post">
+          <label><i class="fa fa-user" aria-hidden="true"></i> <input type="text" placeholder="Name" name="name" value=""></label>
+          <label><i class="fa fa-user" aria-hidden="true"></i> <input type="text" placeholder="Email" name="email" value=""></label>
+          <label><i class="fa fa-lock" aria-hidden="true"></i> <input type="password" placeholder="Password" name="password" value=""></label>
+          <label><i class="fa fa-lock" aria-hidden="true"></i> <input type="password" placeholder="Repeat Password" name="repassword" value=""></label>
+          <button type="submit" name="action" value="register">Register</button>
+        </form>
+      </div>
+    </div>
+    <p>
+      <a href="#">Back to Home</a>
+      <a href="">Register</a>
+    </p>
+  </div>
+</body>
+</html>
+<!-- based in: https://cdn.elegantthemes.com/blog/wp-content/uploads/2016/06/divi-login-page-5.jpg -->
