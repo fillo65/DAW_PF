@@ -1,4 +1,5 @@
 var db = require('../database');
+var bcrypt = require('bcrypt-nodejs');
 module.exports = {
   User: function(){
     var userSchema = new db.Schema({
@@ -18,9 +19,20 @@ module.exports = {
       return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
     },
     userSchema.methods.validPassword = function(password) {
-      return bcrypt.compareSync(password, this.local.password);
+      console.log(password);
+      return bcrypt.compareSync(password, this.password);
     }
-    return db.model('User', userSchema); 
+    return db.model('User', userSchema);
+  },
+  Aulas: function () {
+    var logSchema = new db.Schema({
+      title: {type: String, required: true, unique: true},
+      description: String,
+      url_file: String,
+      created_at: Date,
+      updated_at: Date
+    });
+    return db.model('Aulas', logSchema);
   },
   Logs: function () {
     var logSchema = new db.Schema({

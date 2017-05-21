@@ -72,7 +72,7 @@ input {
     background-image: url(http://www.gestor-energetico.com/data-web/formacion-bim/bim.png);
     background-repeat: no-repeat;
     background-position: -131px -1593px; }
-  .content_login .login,
+  .content_login .register,
   .content_login .lostpassword {
     display: none; }
   .content_login p {
