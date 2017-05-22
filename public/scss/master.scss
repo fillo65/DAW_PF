@@ -54,10 +54,10 @@ p, a, ul{
 
 /*header*/
 nav{
-  background:#FFF;
+  background:$h_nav;
   height: $h_nav;
   display: flex;
-  box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16), 0 2px 10px 0 rgba(0,0,0,0.12);
+  // box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16), 0 2px 10px 0 rgba(0,0,0,0.12);
   h1{
     background: $color-s;
     font-size: 25px;
