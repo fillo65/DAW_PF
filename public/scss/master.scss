@@ -38,6 +38,7 @@ $h_nav: 50px;
 /*General*/
 html, body{
   height: 100%;
+  min-width: 360px;
 }
 body{
   background: $color-back;
@@ -71,42 +72,38 @@ nav{
   }
 }
 /*sidebar*/
-aside{
-  // background: $color-t;
-}
-ul.menu-principal{
+
+.menu-principal{
   list-style: none;
   padding: 0px;
   margin:0px;
+  display: flex;
+  flex-direction: column;
   li{
     display: flex;
     justify-content: center;
-    margin: 15px 0;
-    a{
-      // background-image: url("../img/icons.jpg");
-      // background-repeat: no-repeat;
+    margin: 0;
+  }
+  a{
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 20px 0;
+    border-right: transparent 3px solid;
+    transition: border-color 0.2s linear, fill 0.2s linear;
+    svg{
       height: 80px;
       width: 80px;
-      text-align: center;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      @at-root #{&}:hover{
-        background: rgba(1,1,1,.5);
-      }
-      img{
-        width: 90%;
-      }
+      fill:$color-s; 
     }
   }
-  @at-root #{&}--ico1{
-    // background-position:-55px -1620px;
-  }
-  @at-root #{&}--ico2{
-    // background-position:-300px -1620px;
-  }
-  @at-root #{&}--ico3{
-    // background-position:-555px -1625px;
+  @at-root #{&} a:hover {
+    border-color: cadetblue;
+    &> svg{
+      fill:cadetblue;
+    }
   }
 }
 /*Main*/
@@ -172,4 +169,27 @@ footer{
   align-items: flex-end;
   justify-content: center;
   margin-top: -$h_nav;
+}
+
+/*------------- media queries ------------- */
+@media only screen and (max-width : 768px) {
+  .menu-principal{
+    flex-direction: row;
+    flex-grow: 2;
+    flex-basis: auto;
+    justify-content: center;
+    align-items: center;
+    li{
+      padding: 0;
+      a{
+        border-right: none;
+        border-bottom: transparent 3px solid;
+      }
+    }
+  }
+}
+
+/* Medium Devices, Desktops */
+@media only screen and (min-width : 992px) {
+
 }

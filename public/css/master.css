@@ -24,7 +24,8 @@
 
 /*General*/
 html, body {
-  height: 100%; }
+  height: 100%;
+  min-width: 360px; }
 
 body {
   background: #f1f0ec; }
@@ -53,25 +54,33 @@ nav {
     list-style: none; }
 
 /*sidebar*/
-ul.menu-principal {
+.menu-principal {
   list-style: none;
   padding: 0px;
-  margin: 0px; }
-  ul.menu-principal li {
+  margin: 0px;
+  display: flex;
+  flex-direction: column; }
+  .menu-principal li {
     display: flex;
     justify-content: center;
-    margin: 15px 0; }
-    ul.menu-principal li a {
+    margin: 0; }
+  .menu-principal a {
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 20px 0;
+    border-right: transparent 3px solid;
+    transition: border-color 0.2s linear, fill 0.2s linear; }
+    .menu-principal a svg {
       height: 80px;
       width: 80px;
-      text-align: center;
-      display: flex;
-      align-items: center;
-      justify-content: center; }
-      ul.menu-principal li a:hover {
-        background: rgba(1, 1, 1, 0.5); }
-      ul.menu-principal li a img {
-        width: 90%; }
+      fill: #2c3e50; }
+  .menu-principal a:hover {
+    border-color: cadetblue; }
+    .menu-principal a:hover > svg {
+      fill: cadetblue; }
 
 /*Main*/
 main .main__current_aulas {
@@ -121,3 +130,19 @@ footer {
   align-items: flex-end;
   justify-content: center;
   margin-top: -50px; }
+
+/*------------- media queries ------------- */
+@media only screen and (max-width: 768px) {
+  .menu-principal {
+    flex-direction: row;
+    flex-grow: 2;
+    flex-basis: auto;
+    justify-content: center;
+    align-items: center; }
+    .menu-principal li {
+      padding: 0; }
+      .menu-principal li a {
+        border-right: none;
+        border-bottom: transparent 3px solid; } }
+
+/* Medium Devices, Desktops */

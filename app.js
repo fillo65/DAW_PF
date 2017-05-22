@@ -6,12 +6,14 @@ var express = require('express')
         , flash    = require('connect-flash')
         , morgan   = require('morgan')
         , passport = require('passport')
-        , session = require('express-session');
+        , session = require('express-session')
+        , engine = require('ejs-locals');
 
 var app = express();
 
 app.set('port', process.env.PORT || 8080);
 app.set('views', __dirname + '/views');
+app.engine('ejs', engine);
 app.set('view engine', 'ejs');
 
 app.use(bodyParser.urlencoded({extended:true}));

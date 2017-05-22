@@ -40,14 +40,14 @@ module.exports = function(app, passport){
     var Log = require('../model/log_model');
     Log.findAll().exec(function (err, logs) {
       if (!err) {
-        res.render('log', {logs: logs});
+        res.render('4.logs/log', {logs: logs});
       } else {
         console.log(err);
       }
     });
   });
   app.get('/log/new', isLoggedIn, function(req, res) {
-    res.render('log_new', {});
+    res.render('4.logs/log_new', {});
   });
 
   app.post('/log', isLoggedIn, function(req, res) {
@@ -71,7 +71,7 @@ module.exports = function(app, passport){
     var Log = require('../model/log_model');
     Log.findById(req.params.id).exec(function (err, result) {
       if (!err) {
-        res.render('log_edit', {log: result});
+        res.render('4.logs/log_edit', {log: result});
       } else {
         console.log("err");
       }
@@ -112,56 +112,3 @@ module.exports = function(app, passport){
     });
   });
 };
-//   //Create log
-//   router.post('/log', log.log_save);
-
-//   //pagina de creacion nuevo
-//   router.get('/log/new', log.new);
-//   //pagina de edicion nuevo
-//   //Delete Log
-//   //Update Log
-// };
-//
-// // var express = require('express')
-// //         , methodOverride = require('method-override');
-// // //
-// // var router = express.Router();
-// // var file_index = require("./index");
-// // var file_log_list = require("./log_list");
-// //
-// // //Middle ware that is specific to this router
-// // router.use(function timeLog(req, res, next) {
-// //     console.log('Time: ', Date.now());
-// //     next();
-// // });
-// // //
-// // router.use(methodOverride(function (req, res) {
-// //     if (req.body && typeof req.body === 'object' && '_method' in req.body) {
-// //         var method = req.body._method;
-// //         delete req.body._method;
-// //         return method;
-// //     }
-// // }));
-// //
-// //
-// // //----------------Raiz
-// // router.get('/', file_index.index);
-//
-// // router.get('/home', file_index.index);
-// //
-// // //----------------pagina de lista de logs
-//
-// //---------------- Pagina de Alumnos
-// // router.get('/alumnos', file_log_list.log_list);
-// // //Create log
-// // router.post('/alumnos', file_log_list.log_save);
-// // //pagina de creacion nuevo
-// // router.get('/alumnos/new', file_log_list.new);
-// // //pagina de edicion nuevo
-// // router.get('/alumnos/edit/:id', file_log_list.findById);
-// // //Delete Log
-// // router.delete('/alumnos/edit/:id', file_log_list.delete);
-// // //Update Log
-// // router.put('/alumnos/:id', file_log_list.edit);
-//
-// //exportar la funcion para que la use app
