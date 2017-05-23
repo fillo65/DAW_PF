@@ -1,0 +1,29 @@
+<% layout('../templates/principal') -%>
+<div class="container page-users--new">
+  <div class="col-xs-12 push-md-2">
+    <h4>Nuevo Usuario</h4>
+  </div>
+
+  <div class="col-xs-12">
+    <form action="/users" method="post">
+      <div class="form-group row">
+        <label class="col-sm-4" for="name">Nombre</label>
+        <input class="col-sm-6" autofocus type="text" name="name" placeholder="Name" value="">
+        <label class="col-sm-4" for="name">Correo Electrónico</label>
+        <input class="col-sm-6" type="email" name="email" placeholder="email" value="">
+        <label class="col-sm-4" for="name">Contraseña</label>
+        <input class="col-sm-6" type="password" name="Password" placeholder="Password" value="">
+        <label class="col-sm-4" for="name">Rol</label>
+        <select class="col-sm-6 custom-select">
+          <option value="Estudiante" selected>Estudiante</option>
+          <option value="Profesor">Profesor</option>
+          <option value="Coordinador">Coordinador</option>
+          <option value="Administrador">Administrador</option>
+        </select>
+      </div>
+      <div class="col-sm-6 push-sm-5">
+        <button type="submit" name="registrer">Guardar</button>
+      </div>
+    </form>
+  </div>
+</div>

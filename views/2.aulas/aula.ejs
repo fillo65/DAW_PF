@@ -1,0 +1,33 @@
+<% layout('../templates/principal') -%>
+<div class="container">
+  <h4>Aulas</h4>
+  <div class="col-xs-12">
+    <a href="/aulas/new">Crear Aula</a>
+  </div>
+  <div class="col-sm-8 push-sm-1">
+    <table>
+      <tr>
+        <th> Edición </th>
+        <th> Modulo </th>
+        <th> Nombre </th>
+      </tr>
+      <% data.forEach(function(reg){ %>
+        <tr>
+          <td><%= reg.role %></td>
+          <td><%= reg.email %></td>
+          <td><%= reg.name %></td>
+          <td>
+            <a href="/aulas/edit/<%= reg._id %>">Editar</a>
+          </td>
+          <td>
+            <form method="POST" action='/aulas/edit/<%= reg._id %>' enctype='application/x-www-form-urlencoded' >
+              <input type='hidden' value='DELETE' name='_method' />
+              <button type="submit"> DELETE </button>
+            </form>
+          </td>
+        </tr>
+        <% }) %>
+      </table>
+    </div>
+
+  </div>
