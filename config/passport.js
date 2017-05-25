@@ -1,12 +1,12 @@
 var LocalStrategy = require('passport-local').Strategy;
+var models = require('../model/db_models');
 module.exports = function(passport) {
   passport.serializeUser(function(user, done) {
     done(null, user.id);
   });
 
   passport.deserializeUser(function(id, done) {
-    var User = require('../model/db_models').User();
-    console.log("modelUser");
+    var User = models.User();
     User.findById(id, function(err, user) {
       done(err, user);
     });
@@ -18,8 +18,8 @@ module.exports = function(passport) {
     passReqToCallback : true // allows us to pass back the entire request to the callback
   },
   function(req, email, password, done) {
+    var User = models.User();
     if(req.body.action == "login"){
-      var User = require('../model/db_models').User();
       User.findOne({ 'email' :  email }, function(err, user) {
         if (err){
           return done(err);
@@ -34,7 +34,6 @@ module.exports = function(passport) {
       });
     }else{
       process.nextTick(function() {
-        var User = require('../model/db_models').User();
         User.findOne({ 'email' :  email }, function(err, user) {
           if (err)
           return done(err);
@@ -49,7 +48,6 @@ module.exports = function(passport) {
             newUser.save(function(err) {
               if (err)
               throw err;
-              delete require.cache[require.resolve('../model/db_models')];
               return done(null, newUser);
             });
           }

@@ -19,10 +19,15 @@ module.exports = {
       return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
     },
     userSchema.methods.validPassword = function(password) {
-      console.log(password);
       return bcrypt.compareSync(password, this.password);
     }
-    return db.model('User', userSchema);
+    let User;
+    if (db.models && db.models.User){
+      User = db.models.User;
+    }else{
+      User = db.model('User', userSchema);
+    }
+    return User;
   },
   Aulas: function () {
     var logSchema = new db.Schema({

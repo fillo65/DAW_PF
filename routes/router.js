@@ -1,10 +1,8 @@
 /*--------------*/
 function isLoggedIn(req, res, next) {
-  console.log(req.isAuthenticated());
-  // if (req.isAuthenticated()){
-  // console.log(next());
-  return next();
-  // }
+  if (req.isAuthenticated()){
+    return next();
+  }
   res.render('login.ejs', { message: req.flash('loginMessage') });
 }
 /*--------------*/
@@ -34,8 +32,8 @@ module.exports = function(app, passport){
   });
 
   /*============================  1.users ==============================*/
+  var UserModel = require('../model/users_db');
   app.get('/users', isLoggedIn, function(req, res) {
-    var UserModel = require('../model/users_db');
     UserModel.findAll().exec(function (err, data) {
       console.log(err);
       if (!err) {
@@ -45,12 +43,13 @@ module.exports = function(app, passport){
       }
     });
   });
+
   app.get('/users/new', isLoggedIn, function(req, res) {
     res.render('1.users/user_new');
   });
+
   app.post('/users', isLoggedIn, function(req, res) {
-    var User = require('../model/users_db');
-    if (User.saveData(req.body)) {
+    if (UserModel.saveData(req.body)) {
       res.redirect('/users');
     } else {
       res.redirect('/users/new');
@@ -58,7 +57,6 @@ module.exports = function(app, passport){
   });
 
   app.get('/users/edit/:id', isLoggedIn, function(req, res) {
-    var UserModel = require('../model/users_db');
     UserModel.findById(req.params.id).exec(function (err, result) {
       if (!err) {
         res.render('1.users/user_edit', {data: result});
@@ -69,11 +67,10 @@ module.exports = function(app, passport){
   });
 
   app.put('/users/:id', isLoggedIn, function(req, res) {
-    var User = require('../model/users_db');
-    User.findById(req.params.id).exec(function (err, result) {
+    UserModel.findById(req.params.id).exec(function (err, result) {
       if (!err) {
         console.log("updating...");
-        if (User.updateData(req.body, req.params.id)) {
+        if (UserModel.updateData(req.body, req.params.id)) {
           res.redirect('/users');
         } else {
           res.redirect('/users/edit' + req.params.id);
@@ -85,10 +82,9 @@ module.exports = function(app, passport){
   });
 
   app.delete('/users/edit/:id', isLoggedIn, function(req, res) {
-    var User = require('../model/users_db');
-    User.findById(req.params.id).exec(function (err, result) {
+    UserModel.findById(req.params.id).exec(function (err, result) {
       if (!err) {
-        User.removeData(result).exec(function (err) {
+        UserModel.removeData(result).exec(function (err) {
           if (err) {
             console.log("!err");
             res.send(err.message);
@@ -170,7 +166,17 @@ module.exports = function(app, passport){
     });
   });
   /*============================  3.calendar ==============================*/
-
+  app.get('/calendar', isLoggedIn, function(req, res) {
+    // var CalendarModel = require('../model/calendar_db');
+    // CalendarModel.findAll().exec(function (err, data) {
+    // console.log(err);
+    // if (!err) {
+    res.render('3.calendar/calendar', {});
+    // } else {
+    //   console.log(err);
+    // }
+    // });
+  });
   /*============================  4.logs ==============================*/
   app.get('/log', isLoggedIn, function(req, res) {
     var Log = require('../model/log_model');
@@ -239,4 +245,43 @@ module.exports = function(app, passport){
       }
     });
   });
+
+  /*============================  5.config ==============================*/
+  app.get('/config', isLoggedIn, function(req, res) {
+    // var CalendarModel = require('../model/calendar_db');
+    // CalendarModel.findAll().exec(function (err, data) {
+    // console.log(err);
+    // if (!err) {
+    res.render('5.settings/settings', {});
+    // } else {
+    //   console.log(err);
+    // }
+    // });
+  });
+  /*============================  5.config servicios ==============================*/
+  app.get('/config/servicios', isLoggedIn, function(req, res) {
+    // var ServiciosModel = require('../model/servicios_db');
+    // ServiciosModel.findAll().exec(function (err, data) {
+    // console.log(err);
+    // if (!err) {
+    res.render('5.1.servicios/servicios', {});
+    // } else {
+    //   console.log(err);
+    // }
+    // });
+  });
+
+  /*============================  5.config ediciones ==============================*/
+  app.get('/config/ediciones', isLoggedIn, function(req, res) {
+    // var EdicionesModel = require('../model/ediciones_db');
+    // EdicionesModel.findAll().exec(function (err, data) {
+    // console.log(err);
+    // if (!err) {
+    res.render('5.2.ediciones/ediciones', {});
+    // } else {
+    //   console.log(err);
+    // }
+    // });
+  });
+
 };

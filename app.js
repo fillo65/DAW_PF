@@ -37,6 +37,7 @@ app.use(flash()); // use connect-flash for flash messages stored in session
 require('./routes/router')(app, passport);
 require('./config/passport')(passport);
 
+
 http.createServer(app).listen(app.get('port'), function () {
     console.log("Express server listening on port " + app.get('port'));
 });

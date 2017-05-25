@@ -1,5 +1,5 @@
 var models = require('./db_models');
-var User = models.User();
+let User = models.User();
 module.exports = {
   saveData: function (data) {
     var userData = new User(data);
