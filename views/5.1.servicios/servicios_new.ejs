@@ -1,0 +1,25 @@
+<% layout('../templates/principal') -%>
+<div class="container page-new--servicios">
+  <div class="col-xs-12 push-md-2">
+    <h4>Nuevo Servicio</h4>
+  </div>
+  <div class="col-xs-12">
+    <form action="/config/servicios" method="post">
+      <div class="form-group row">
+        <label class="col-sm-4" for="name">Nombre</label>
+        <input class="col-sm-6" autofocus type="text" name="name" placeholder="Name" value="">
+        <label class="col-sm-4" for="name">Precio</label>
+        <input class="col-sm-6" type="number" min="1" step="any" name="price" placeholder="Precio" value="0">
+        <label class="col-sm-4" for="name">Tipo</label>
+        <select class="col-sm-6 custom-select" name="type">
+          <option value="Curso" selected>Curso</option>
+          <option value="Master">Master</option>
+          <option value="Postgrado">Postgrado</option>
+        </select>
+      </div>
+      <div class="col-sm-6 push-sm-5">
+        <button type="submit" name="new">Guardar</button>
+      </div>
+    </form>
+  </div>
+</div>

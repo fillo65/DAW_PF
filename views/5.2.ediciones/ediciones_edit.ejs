@@ -1,0 +1,26 @@
+<% layout('../templates/principal') -%>
+<div class="container page-users--new">
+  <div class="col-xs-12 push-md-2">
+    <h4>Editar Servicio</h4>
+  </div>
+  <div class="col-xs-12">
+    <form method="POST" action='/config/ediciones/<%= data._id %>' enctype='application/x-www-form-urlencoded' >
+      <input value="PUT" type="hidden" name="_method"/>
+      <div class="form-group row">
+        <label class="col-sm-4" for="name">Año</label>
+        <input class="col-sm-6" autofocus type="number" min="0" step="any"  name="year" placeholder="Año" value="<%= data.year %>">
+        <label class="col-sm-4" for="name">Mes</label>
+        <input class="col-sm-6" type="number" min="0" step="any" name="price" placeholder="Mes" value="<%= (data.month) %>">
+        <label class="col-sm-4" for="name">Servicio</label>
+        <select class="col-sm-6 custom-select" name="type">
+          <option value="Curso" selected>Curso</option>
+          <option value="Master">Master</option>
+          <option value="Postgrado">Postgrado</option>
+        </select>
+      </div>
+      <div class="col-sm-6 push-sm-5">
+        <button type="submit" name="guardar">Guardar</button>
+      </div>
+    </form>
+  </div>
+</div>

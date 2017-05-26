@@ -1,0 +1,33 @@
+<% layout('../templates/principal') -%>
+<div class="container">
+  <h4>Servicios</h4><span><a href="/config/servicios/new">Crear Nuevo</a></span>
+  <div class="col-xs-12">
+    <table class="table">
+      <tr>
+        <th> Nombre </th>
+        <th> Precio </th>
+        <th> Tipo </th>
+        <th> Fecha Creacion </th>
+        <th colspan="2"> Opciones </th>
+      </tr>
+      <% data.forEach(function(reg){ %>
+        <tr>
+          <td><%= reg.name %></td>
+          <td><%= reg.price %></td>
+          <td><%= reg.type %></td>
+          <td><%= reg.created_at.getTime() %></td>
+          <td>
+            <a href="/config/servicios/edit/<%= reg._id %>">Editar</a>
+          </td>
+          <td>
+            <form method="POST" action='/config/servicios/edit/<%= reg._id %>' enctype='application/x-www-form-urlencoded' >
+              <input type='hidden' value='DELETE' name='_method' />
+              <button type="submit"> DELETE </button>
+            </form>
+          </td>
+        </tr>
+        <% }) %>
+      </table>
+  </div>
+
+</div>

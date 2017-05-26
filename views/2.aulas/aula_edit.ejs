@@ -1,16 +1,16 @@
 <% layout('../templates/principal') -%>
-<div class="container page-new--users">
+<div class="container page-users--new">
   <div class="col-xs-12 push-md-2">
-    <h4>Nuevo Usuario</h4>
+    <h4>Editar Aula</h4>
   </div>
-
   <div class="col-xs-12">
-    <form action="/users" method="post">
+    <form method="POST" action='/users/<%= data._id %>' enctype='application/x-www-form-urlencoded' >
+      <input value="PUT" type="hidden" name="_method"/>
       <div class="form-group row">
         <label class="col-sm-4" for="name">Nombre</label>
-        <input class="col-sm-6" autofocus type="text" name="name" placeholder="Name" value="">
+        <input class="col-sm-6" autofocus type="text" name="name" placeholder="Name" value="<%= data.name %>">
         <label class="col-sm-4" for="name">Correo Electrónico</label>
-        <input class="col-sm-6" type="email" name="email" placeholder="email" value="">
+        <input class="col-sm-6" type="email" name="email" placeholder="email" value="<%= data.email %>">
         <label class="col-sm-4" for="name">Contraseña</label>
         <input class="col-sm-6" type="password" name="Password" placeholder="Password" value="">
         <label class="col-sm-4" for="name">Rol</label>
@@ -22,7 +22,7 @@
         </select>
       </div>
       <div class="col-sm-6 push-sm-5">
-        <button type="submit" name="registrer">Guardar</button>
+        <button type="submit" name="guardar">Guardar</button>
       </div>
     </form>
   </div>

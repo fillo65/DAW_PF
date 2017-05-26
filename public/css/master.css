@@ -159,22 +159,40 @@ footer {
 
 /* Medium Devices, Desktops */
 /*================== page-user ==================*/
-.page-users--new h4 {
+.page-new--servicios h4, .page-new--ediciones h4, .page-new--aula h4, .page-new--log h4, .page-new--users h4 {
   margin: 0 0 30px 0; }
 
-.page-users--new label {
+.page-new--servicios label, .page-new--ediciones label, .page-new--aula label, .page-new--log label, .page-new--users label {
   font-weight: bold; }
 
-.page-users--new input {
+.page-new--servicios input, .page-new--servicios textarea, .page-new--ediciones input, .page-new--ediciones textarea, .page-new--aula input, .page-new--aula textarea, .page-new--log input, .page-new--log textarea, .page-new--users input, .page-new--users textarea {
   border-radius: 5px;
   border: solid 1px #ccc;
   padding: 10px 15px;
   margin: 10px 0; }
 
-.page-users--new button {
+.page-new--servicios button, .page-new--ediciones button, .page-new--aula button, .page-new--log button, .page-new--users button {
   border-radius: 20px;
   border: solid 1px #ccc;
   padding: 10px 15px;
   background: #fff;
   width: 60%;
   margin-top: 50px; }
+
+.settings {
+  text-align: center; }
+  .settings--empresa a {
+    justify-content: center;
+    background-color: #fff;
+    border: solid 1px #ccc;
+    padding: 10px;
+    margin: 0;
+    display: flex; }
+    .settings--empresa a:first-child {
+      border-bottom: none; }
+    .settings--empresa a:last-child {
+      border-top: none; }
+    .settings--empresa a:hover {
+      text-decoration: none;
+      color: #000;
+      opacity: 0.7; }

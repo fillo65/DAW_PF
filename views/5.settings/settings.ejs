@@ -1,10 +1,47 @@
 <% layout('../templates/principal') -%>
-<div class="container">
+<div class="container page-new--settings">
   <h4>Configuración</h4>
-  <div class="col-xs-12 col-sm-6">
-    <a href="/config/servicios">Servicios</a>
+  <hr>
+  <div class="row settings">
+    <div class="col-sm-6 settings--panel">
+      <h5>Sobre el Panel</h5>
+      <form class="post" action="#" method="post">
+        <div class="form-group row">
+          <label class="col-sm-6" for="name">Calendario Principal</label>
+          <select class="col-sm-5 custom-select">
+            <option value="Estudiante" selected>Calendario 2</option>
+            <option value="Profesor">calendario 3</option>
+            <option value="Coordinador">Cal 252</option>
+            <option value="Administrador">test</option>
+          </select>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-6" for="name">Numero de Aulas Recientes</label>
+          <input class="col-sm-5 custom-select" type="number" max="5" name="numberAulas" value="5">
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-6" for="name">Numero de Usuarios Recientes</label>
+          <input class="col-sm-5 custom-select" type="number" max="6" name="numberUsers" value="6">
+        </div>
+        <div class="col-sm-6 push-sm-4">
+          <button type="submit" name="settings">Guardar</button>
+        </div>
+      </form>
+    </div>
+    <div class="col-sm-6 settings--empresa">
+      <h5>Sobre la empresa</h5>
+      <div class="row">
+        <div class="col-sm-4">
+          <a href="/config/servicios">Servicios</a>
+          <a href="/config/servicios/new">Nueva</a>
+        </div>
+        <div class="col-sm-4">
+          <a href="/config/ediciones">Ediciones</a>
+          <a href="/config/ediciones/new">Nueva</a>
+        </div>
+      </div>
+    </div>
   </div>
-  <div class="col-xs-12 col-sm-6">
-    <a href="/config/ediciones">Ediciones</a>
-  </div>
+  <hr>
+
 </div>

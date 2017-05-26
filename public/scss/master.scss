@@ -220,11 +220,13 @@ footer{
 }
 
 /*================== page-user ==================*/
-.page-users{
-  @at-root #{&}--main{
+.page-new{
 
-  }
-  @at-root #{&}--new{
+  &--servicios,
+  &--ediciones,
+  &--aula,
+  &--log,
+  &--users{
     h4{
       margin: 0 0 30px 0;
     }
@@ -236,7 +238,7 @@ footer{
       font-weight: bold;
       // text-align: left;
     }
-    input{
+    input, textarea{
       border-radius: 5px;
       border:solid 1px $color-p;
       padding: 10px 15px;
@@ -249,6 +251,31 @@ footer{
       background: #fff;
       width: 60%;
       margin-top: 50px;
+    }
+  }
+}
+.settings{
+  text-align: center;
+  &--panel{}
+  &--empresa{
+    a{
+      justify-content: center;
+      background-color: #fff;
+      border: solid 1px $color-p;
+      padding: 10px;
+      margin: 0;
+      display: flex;
+      @at-root #{&}:first-child{
+        border-bottom: none;
+      }
+      @at-root #{&}:last-child{
+        border-top: none;
+      }
+      @at-root #{&}:hover{
+        text-decoration: none;
+        color: #000;
+        opacity: 0.7;
+      }
     }
   }
 }
