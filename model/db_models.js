@@ -77,9 +77,9 @@ module.exports = {
   },
   Aulas: function () {
     var AulaSchema = new db.Schema({
-      modules: [String],
-      alumnes: [String],
-      editions: [String],
+      modules: [db.Schema.ObjectId],
+      alumnes: [db.Schema.ObjectId],
+      edition: db.Schema.ObjectId,
       notas: [db.Schema.ObjectId],
       number_vc: Number,
       created_at: Number,

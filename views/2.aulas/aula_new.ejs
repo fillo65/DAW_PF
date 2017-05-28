@@ -10,17 +10,16 @@
         <label class="col-sm-12" for="name">Modulos</label>
         <div class="col-sm-12">
           <select multiple id="" class="searchable" name="modules[]">
-            <option value='elem_1' selected>elem 1</option>
-            <option value='elem_2'>elem 2</option>
-            <option value='elem_3'>elem 3</option>
-            <option value='elem_100'>elem 100</option>
+            <% cursos.forEach(function(reg){ %>
+              <option value="<%= reg._id %>"><%= reg.name %></option>
+              <% }) %>
           </select>
         </div>
         <hr class="col-10">
         <label class="col-sm-4" for="name">Numero de Videoconferencias</label>
         <input class="col-sm-6" type="number" name="number_vc" placeholder="4" min="0" max="8" value="4">
         <label class="col-sm-4" for="name">Edición</label>
-        <select class="col-sm-6 custom-select" name="type">
+        <select class="col-sm-6 custom-select" name="edition">
           <option value="Curso" selected>Curso</option>
           <option value="Master">Master</option>
           <option value="Postgrado">Postgrado</option>
@@ -29,11 +28,9 @@
         <label class="col-sm-12" for="name">Alumnos</label>
         <div class="col-sm-12">
           <select multiple id="custom-headers" class="searchable" name="alumnes[]">
-            <option value='elem_1' selected>elem 1</option>
-            <option value='elem_2'>elem 2</option>
-            <option value='elem_3'>elem 3</option>
-            <option value='elem_4' selected>elem 4</option>
-            <option value='elem_100'>elem 100</option>
+            <% users.forEach(function(reg){ %>
+              <option value="<%= reg._id %>"><%= reg.name %> <%= reg.email %></option>
+              <% }) %>
           </select>
         </div>
       </div>

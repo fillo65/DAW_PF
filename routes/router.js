@@ -110,7 +110,21 @@ module.exports = function(app, passport){
     });
   });
   app.get('/aulas/new', isLoggedIn, function(req, res) {
-    res.render('2.aulas/aula_new');
+    var ServiciosModel = require('../model/services_db');
+    UserModel.findAll().where("role").equals("Estudiante").exec(function (err, data_users) {
+      console.log(err);
+      if (!err) {
+        ServiciosModel.findAll().where("type").equals("Curso").exec(function (err, cursos) {
+          if (!err) {
+            res.render('2.aulas/aula_new', {users: data_users, cursos: cursos});
+          } else {
+            console.log(err);
+          }
+        });
+      } else {
+        console.log(err);
+      }
+    });
   });
   app.post('/aulas', isLoggedIn, function(req, res) {
     console.log(req.body);
