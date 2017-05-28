@@ -20,9 +20,9 @@
         <input class="col-sm-6" type="number" name="number_vc" placeholder="4" min="0" max="8" value="4">
         <label class="col-sm-4" for="name">Edición</label>
         <select class="col-sm-6 custom-select" name="edition">
-          <option value="Curso" selected>Curso</option>
-          <option value="Master">Master</option>
-          <option value="Postgrado">Postgrado</option>
+          <% editions.forEach(function(reg){ %>
+            <option value="<%= reg._id %>"><%= reg.yearC %>-<%= reg.monthC %> <%= reg.Service %></option>
+            <% }) %>
         </select>
         <hr class="col-10">
         <label class="col-sm-12" for="name">Alumnos</label>

@@ -100,9 +100,26 @@ module.exports = function(app, passport){
   /*============================  2.aulas ==============================*/
   app.get('/aulas', isLoggedIn, function(req, res) {
     var AulasModel = require('../model/aulas_db');
+    var ServiciosModel = require('../model/services_db');
     AulasModel.findAll().exec(function (err, data) {
-      console.log(err);
       if (!err) {
+        console.log("data------------------------");
+        // console.log(data);
+        console.log("data------------------------");
+        let modules_data =  [];
+        for (var key in data) {
+          if (!data.hasOwnProperty(key)) continue;
+          ServiciosModel.findInArray(data[key].modules).exec(function (err, mod) {
+            console.log(err);
+            if (!err) {
+              modules_data.push(mod);
+            } else {
+              console.log(err);
+            }
+          });
+          data[key]["modules_data"] = modules_data;
+        }
+        console.log(data);
         res.render('2.aulas/aula_main', {data: data});
       } else {
         console.log(err);
@@ -114,9 +131,18 @@ module.exports = function(app, passport){
     UserModel.findAll().where("role").equals("Estudiante").exec(function (err, data_users) {
       console.log(err);
       if (!err) {
+        data_users = data_users;
         ServiciosModel.findAll().where("type").equals("Curso").exec(function (err, cursos) {
           if (!err) {
-            res.render('2.aulas/aula_new', {users: data_users, cursos: cursos});
+            var EdicionesModel = require('../model/editions_db');
+            EdicionesModel.findAll().exec(function (err, editions) {
+              console.log(err);
+              if (!err) {
+                res.render('2.aulas/aula_new', {users: data_users, cursos: cursos, editions:editions});
+              } else {
+                console.log(err);
+              }
+            });
           } else {
             console.log(err);
           }
@@ -128,12 +154,12 @@ module.exports = function(app, passport){
   });
   app.post('/aulas', isLoggedIn, function(req, res) {
     console.log(req.body);
-    // var User = require('../model/aulas_db');
-    // if (User.saveData(req.body)) {
-    res.redirect('/aulas');
-    // } else {
-      // res.redirect('/aulas/new');
-    // }
+    var Aulas = require('../model/aulas_db');
+    if (Aulas.saveData(req.body)) {
+      res.redirect('/aulas');
+    } else {
+      res.redirect('/aulas/new');
+    }
   });
 
   app.get('/aulas/edit/:id', isLoggedIn, function(req, res) {

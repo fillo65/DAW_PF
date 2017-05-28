@@ -3,7 +3,6 @@ var Aulas = models.Aulas();
 module.exports = {
   saveData: function (data) {
     var aulasData = new Aulas(data);
-    aulasData.password = aulasData.generateHash(data.password);
     var res = true;
     aulasData.save(function (err) {
       if (err) {
@@ -16,7 +15,8 @@ module.exports = {
     return Aulas.findById({_id: id});
   },
   findAll: function () {
-    return Aulas.find({});
+    let aulas = Aulas.find({});
+    return aulas;
   },
   updateData: function (reg, id) {
     var res = true;

@@ -14,6 +14,9 @@ module.exports = {
   findById: function (id) {
     return services.findById({_id: id});
   },
+  findInArray: function (arr) {
+    return services.find({_id: { $in:  [arr]  }});
+  },
   findAll: function () {
     return services.find({});
   },
