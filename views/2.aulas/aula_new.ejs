@@ -1,25 +1,41 @@
 <% layout('../templates/principal') -%>
 <div class="container page-new--aula">
   <div class="col-xs-12 push-md-2">
-    <h4>Nuevo Aula</h4>
+    <h4>Nueva Aula</h4>
   </div>
 
   <div class="col-xs-12">
-    <form action="/users" method="post">
+    <form action="/aulas" method="post">
       <div class="form-group row">
-        <label class="col-sm-4" for="name">Nombre</label>
-        <input class="col-sm-6" autofocus type="text" name="name" placeholder="Name" value="">
-        <label class="col-sm-4" for="name">Correo Electrónico</label>
-        <input class="col-sm-6" type="email" name="email" placeholder="email" value="">
-        <label class="col-sm-4" for="name">Contraseña</label>
-        <input class="col-sm-6" type="password" name="Password" placeholder="Password" value="">
-        <label class="col-sm-4" for="name">Rol</label>
-        <select class="col-sm-6 custom-select">
-          <option value="Estudiante" selected>Estudiante</option>
-          <option value="Profesor">Profesor</option>
-          <option value="Coordinador">Coordinador</option>
-          <option value="Administrador">Administrador</option>
+        <label class="col-sm-12" for="name">Modulos</label>
+        <div class="col-sm-12">
+          <select multiple id="" class="searchable" name="modules[]">
+            <option value='elem_1' selected>elem 1</option>
+            <option value='elem_2'>elem 2</option>
+            <option value='elem_3'>elem 3</option>
+            <option value='elem_100'>elem 100</option>
+          </select>
+        </div>
+        <hr class="col-10">
+        <label class="col-sm-4" for="name">Numero de Videoconferencias</label>
+        <input class="col-sm-6" type="number" name="number_vc" placeholder="4" min="0" max="8" value="4">
+        <label class="col-sm-4" for="name">Edición</label>
+        <select class="col-sm-6 custom-select" name="type">
+          <option value="Curso" selected>Curso</option>
+          <option value="Master">Master</option>
+          <option value="Postgrado">Postgrado</option>
         </select>
+        <hr class="col-10">
+        <label class="col-sm-12" for="name">Alumnos</label>
+        <div class="col-sm-12">
+          <select multiple id="custom-headers" class="searchable" name="alumnes[]">
+            <option value='elem_1' selected>elem 1</option>
+            <option value='elem_2'>elem 2</option>
+            <option value='elem_3'>elem 3</option>
+            <option value='elem_4' selected>elem 4</option>
+            <option value='elem_100'>elem 100</option>
+          </select>
+        </div>
       </div>
       <div class="col-sm-6 push-sm-5">
         <button type="submit" name="registrer">Guardar</button>
@@ -27,3 +43,43 @@
     </form>
   </div>
 </div>
+<script src="js/bootstrap_v3.js" charset="utf-8"></script>
+<script src="/js/jquery.multi-select.js" charset="utf-8"></script>
+<script src="/js/jquery.quicksearch.js" charset="utf-8"></script>
+<script type="text/javascript">
+$('.searchable').multiSelect({
+  selectableHeader: "<input type='text' class='search-input' autocomplete='off' placeholder='Filtro'>",
+  selectionHeader: "<input type='text' class='search-input' autocomplete='off' placeholder='Filtro'>",
+  afterInit: function(ms){
+    var that = this,
+    $selectableSearch = that.$selectableUl.prev(),
+    $selectionSearch = that.$selectionUl.prev(),
+    selectableSearchString = '#'+that.$container.attr('id')+' .ms-elem-selectable:not(.ms-selected)',
+    selectionSearchString = '#'+that.$container.attr('id')+' .ms-elem-selection.ms-selected';
+
+    that.qs1 = $selectableSearch.quicksearch(selectableSearchString)
+    .on('keydown', function(e){
+      if (e.which === 40){
+        that.$selectableUl.focus();
+        return false;
+      }
+    });
+
+    that.qs2 = $selectionSearch.quicksearch(selectionSearchString)
+    .on('keydown', function(e){
+      if (e.which == 40){
+        that.$selectionUl.focus();
+        return false;
+      }
+    });
+  },
+  afterSelect: function(){
+    this.qs1.cache();
+    this.qs2.cache();
+  },
+  afterDeselect: function(){
+    this.qs1.cache();
+    this.qs2.cache();
+  }
+});
+</script>

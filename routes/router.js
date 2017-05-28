@@ -113,12 +113,13 @@ module.exports = function(app, passport){
     res.render('2.aulas/aula_new');
   });
   app.post('/aulas', isLoggedIn, function(req, res) {
-    var User = require('../model/aulas_db');
-    if (User.saveData(req.body)) {
-      res.redirect('/aulas');
-    } else {
-      res.redirect('/aulas/new');
-    }
+    console.log(req.body);
+    // var User = require('../model/aulas_db');
+    // if (User.saveData(req.body)) {
+    res.redirect('/aulas');
+    // } else {
+      // res.redirect('/aulas/new');
+    // }
   });
 
   app.get('/aulas/edit/:id', isLoggedIn, function(req, res) {

@@ -58,7 +58,7 @@ module.exports = {
       type: String,
       prefix: String,
       modules: [db.Schema.ObjectId],
-      created_at: Date
+      created_at: Number
     });
 
     schema.pre('save', function (next) {
@@ -107,7 +107,7 @@ module.exports = {
       updated_at: Date
     });
     logSchema.pre('save', function (next) {
-      var currentDate = new Date();
+      var currentDate = new Date().getTime();
       this.updated_at = currentDate;
       this.created_at = currentDate;
       next();
