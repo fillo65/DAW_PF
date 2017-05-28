@@ -56,6 +56,7 @@ module.exports = {
       name: String,
       price: Number,
       type: String,
+      prefix: String,
       modules: [db.Schema.ObjectId],
       created_at: Date
     });
@@ -76,11 +77,24 @@ module.exports = {
   },
   Aulas: function () {
     var AulaSchema = new db.Schema({
-      title: {type: String, required: true, unique: true},
-      description: String,
-      url_file: String,
-      created_at: Date,
-      updated_at: Date
+      modules: [String],
+      alumnes: [String],
+      editions: [String],
+      notas: [db.Schema.ObjectId],
+      number_vc: Number,
+      created_at: Number,
+      updated_at: Number
+    });
+    AulaSchema.pre('save', function (next) {
+      var currentDate = new Date().getTime();
+      this.updated_at = currentDate;
+      this.created_at = currentDate;
+      next();
+    });
+    AulaSchema.pre('update', function (next) {
+      var currentDate = new Date().getTime();
+      this.updated_at = currentDate;
+      next();
     });
     return db.model('Aulas', AulaSchema);
   },
