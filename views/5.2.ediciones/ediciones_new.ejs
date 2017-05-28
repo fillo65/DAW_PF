@@ -8,19 +8,19 @@
     <form action="/config/ediciones" method="post">
       <div class="form-group row">
         <label class="col-sm-4" for="name">Año</label>
-        <input class="col-sm-6" autofocus type="number" min="0" step="any"  name="year" placeholder="Año" value="">
+        <input class="col-sm-6" autofocus type="number" required min="0" step="any"  name="yearC" placeholder="Año" value="">
         <label class="col-sm-4" for="name">Mes</label>
-        <input class="col-sm-6" type="number" min="1" max="12" step="any" name="price" placeholder="Mes" value="">
+        <input class="col-sm-6" type="number" min="1" max="12" step="any" required name="monthC" placeholder="Mes" value="">
         <label class="col-sm-4" for="name">Servicio</label>
-        <select class="col-sm-6 custom-select" name="type">
-          <option value="Curso" selected>Curso</option>
-          <option value="Master">Master</option>
-          <option value="Postgrado">Postgrado</option>
-        </select>
-      </div>
-      <div class="col-sm-6 push-sm-5">
-        <button type="submit" name="registrer">Guardar</button>
-      </div>
-    </form>
+        <select class="col-sm-6 custom-select" name="Service" required>
+          <% data.forEach(function(reg){ %>
+            <option value="<%= reg.name %>"><%= reg.type %> <%= reg.name %></option>
+            <% }) %>
+          </select>
+        </div>
+        <div class="col-sm-6 push-sm-5">
+          <button type="submit" name="update">Guardar</button>
+        </div>
+      </form>
+    </div>
   </div>
-</div>

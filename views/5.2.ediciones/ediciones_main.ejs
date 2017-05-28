@@ -4,16 +4,15 @@
   <div class="col-xs-12">
     <table class="table">
       <tr>
-        <th>Año </th>
-        <th>Mes </th>
+        <th>Fecha </th>
         <th>Servicio </th>
         <th>Fecha de creacion </th>
+        <th colspan="2">Opciones</th>
       </tr>
       <% data.forEach(function(reg){ %>
         <tr>
-          <td><%= reg.year %></td>
-          <td><%= reg.month %></td>
-          <td><%= reg.service %></td>
+          <td><%= reg.yearC %>-<%= reg.monthC %></td>
+          <td><%= reg.Service %></td>
           <td><%= reg.created_at.getTime() %></td>
           <td>
             <a href="/config/ediciones/edit/<%= reg._id %>">Editar</a>

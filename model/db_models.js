@@ -31,25 +31,25 @@ module.exports = {
   },
   Ediciones: function(){
     var EditionSchema = new db.Schema({
-      year: Number,
-      month: Number,
+      yearC: Number,
+      monthC: Number,
       Service: String,
       created_at: Date
     });
-    //
-    // // EditionSchema.pre('save', function (next) {
-    // //   var currentDate = new Date().getTime();
-    // //   this.created_at = currentDate;
-    // //   next();
-    // // });
-    //
-    // let Editions;
-    // if (db.models && db.models.Ediciones){
-    //   Editions = db.models.Ediciones;
-    // }else{
-      // Editions = db.model('Ediciones', EditionSchema);
-    // }
-    return Editions;
+
+    EditionSchema.pre('save', function (next) {
+      var currentDate = new Date().getTime();
+      this.created_at = currentDate;
+      next();
+    });
+
+    let Editions;
+    if (db.models && db.models.Ediciones){
+      Editions = db.models.Ediciones;
+    }else{
+      Editions = db.model('Ediciones', EditionSchema);
+    }
+    return  Editions;
   },
   Services: function(){
     var schema = new db.Schema({

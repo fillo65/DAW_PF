@@ -335,14 +335,22 @@ module.exports = function(app, passport){
     EdicionesModel.findAll().exec(function (err, data) {
       console.log(err);
       if (!err) {
-        res.render('5.2.ediciones/ediciones_main', {});
+        res.render('5.2.ediciones/ediciones_main', {data: data});
       } else {
         console.log(err);
       }
     });
   });
   app.get('/config/ediciones/new', isLoggedIn, function(req, res) {
-    res.render('5.2.ediciones/ediciones_new', {});
+    var ServiciosModel = require('../model/services_db');
+    ServiciosModel.findAll().exec(function (err, data) {
+      console.log(err);
+      if (!err) {
+        res.render('5.2.ediciones/ediciones_new', {data:data});
+      } else {
+        console.log(err);
+      }
+    });
   });
 
   app.post('/config/ediciones', isLoggedIn, function(req, res) {
@@ -358,7 +366,15 @@ module.exports = function(app, passport){
     var Ediciones = require('../model/editions_db');
     Ediciones.findById(req.params.id).exec(function (err, result) {
       if (!err) {
-        res.render('5.2.ediciones/ediciones_edit', {data: result});
+        var ServiciosModel = require('../model/services_db');
+        ServiciosModel.findAll().exec(function (err, data) {
+          console.log(err);
+          if (!err) {
+            res.render('5.2.ediciones/ediciones_edit', {data: result, data_services: data});
+          } else {
+            console.log(err);
+          }
+        });
       } else {
         console.log("err");
       }

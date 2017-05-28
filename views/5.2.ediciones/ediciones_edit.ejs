@@ -5,22 +5,26 @@
   </div>
   <div class="col-xs-12">
     <form method="POST" action='/config/ediciones/<%= data._id %>' enctype='application/x-www-form-urlencoded' >
-      <input value="PUT" type="hidden" name="_method"/>
       <div class="form-group row">
+        <input value="PUT" type="hidden" name="_method"/>
         <label class="col-sm-4" for="name">Año</label>
-        <input class="col-sm-6" autofocus type="number" min="0" step="any"  name="year" placeholder="Año" value="<%= data.year %>">
+        <input class="col-sm-6" autofocus type="number" min="0" step="any"  required name="yearC" placeholder="Año" value="<%= data.yearC %>">
         <label class="col-sm-4" for="name">Mes</label>
-        <input class="col-sm-6" type="number" min="0" step="any" name="price" placeholder="Mes" value="<%= (data.month) %>">
+        <input class="col-sm-6" type="number" min="0" step="any" name="monthC" required placeholder="Mes" value="<%= (data.monthC) %>">
         <label class="col-sm-4" for="name">Servicio</label>
-        <select class="col-sm-6 custom-select" name="type">
-          <option value="Curso" selected>Curso</option>
-          <option value="Master">Master</option>
-          <option value="Postgrado">Postgrado</option>
-        </select>
+        <select class="col-sm-6 custom-select" name="Service" required>
+          <% data_services.forEach(function(reg){ %>
+            <% if(reg.name == data.Service){ %>
+              <option value="<%= reg.name %>" selected><%= reg.name %></option>
+              <% } else{ %>
+                <option value="<%= reg.name %>"><%= reg.name %></option>
+                <% } %>
+                <% }) %>
+              </select>
+            </div>
+            <div class="col-sm-6 push-sm-5">
+              <button type="submit" name="guardar">Guardar</button>
+            </div>
+          </form>
+        </div>
       </div>
-      <div class="col-sm-6 push-sm-5">
-        <button type="submit" name="guardar">Guardar</button>
-      </div>
-    </form>
-  </div>
-</div>
