@@ -13,21 +13,35 @@
       </tr>
       <% data.forEach(function(reg){ %>
         <tr>
-          <td><%= reg.modules %></td>
-          <td><%= reg.email %></td>
-          <td><%= reg.name %></td>
           <td>
-            <a href="/aulas/edit/<%= reg._id %>">Editar</a>
+            <%= reg.edition.yearC %>-<%= reg.edition.monthC %> <%= reg.edition.Service %>
           </td>
           <td>
-            <form method="POST" action='/aulas/edit/<%= reg._id %>' enctype='application/x-www-form-urlencoded' >
-              <input type='hidden' value='DELETE' name='_method' />
-              <button type="submit"> DELETE </button>
-            </form>
-          </td>
-        </tr>
-        <% }) %>
-      </table>
-    </div>
+            <ul>
+              <% reg.modules.forEach(function(regi){ %>
+                <li><%= regi.name %></li>
+                <% }) %>
+              </ul>
+            </td>
+            <td>
+              <ul>
+                <% reg.alumnes.forEach(function(regi){ %>
+                  <li><%= regi.email %></li>
+                  <% }) %>
+                </ul>
+              </td>
+              <td>
+                <a href="/aulas/edit/<%= reg._id %>">Editar</a>
+              </td>
+              <td>
+                <form method="POST" action='/aulas/edit/<%= reg._id %>' enctype='application/x-www-form-urlencoded' >
+                  <input type='hidden' value='DELETE' name='_method' />
+                  <button type="submit"> DELETE </button>
+                </form>
+              </td>
+            </tr>
+            <% }) %>
+          </table>
+        </div>
 
-  </div>
+      </div>

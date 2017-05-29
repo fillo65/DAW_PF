@@ -100,25 +100,8 @@ module.exports = function(app, passport){
   /*============================  2.aulas ==============================*/
   app.get('/aulas', isLoggedIn, function(req, res) {
     var AulasModel = require('../model/aulas_db');
-    var ServiciosModel = require('../model/services_db');
     AulasModel.findAll().exec(function (err, data) {
       if (!err) {
-        console.log("data------------------------");
-        // console.log(data);
-        console.log("data------------------------");
-        let modules_data =  [];
-        for (var key in data) {
-          if (!data.hasOwnProperty(key)) continue;
-          ServiciosModel.findInArray(data[key].modules).exec(function (err, mod) {
-            console.log(err);
-            if (!err) {
-              modules_data.push(mod);
-            } else {
-              console.log(err);
-            }
-          });
-          data[key]["modules_data"] = modules_data;
-        }
         console.log(data);
         res.render('2.aulas/aula_main', {data: data});
       } else {

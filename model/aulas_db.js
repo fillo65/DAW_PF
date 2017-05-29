@@ -15,7 +15,7 @@ module.exports = {
     return Aulas.findById({_id: id});
   },
   findAll: function () {
-    let aulas = Aulas.find({});
+    let aulas = Aulas.find({}).populate('modules alumnes edition') ;
     return aulas;
   },
   updateData: function (reg, id) {

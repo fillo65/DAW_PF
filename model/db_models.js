@@ -76,10 +76,12 @@ module.exports = {
     return Service;
   },
   Aulas: function () {
+    var serv = this.Services();
+    var edi = this.Ediciones();
     var AulaSchema = new db.Schema({
-      modules: [db.Schema.ObjectId],
-      alumnes: [db.Schema.ObjectId],
-      edition: db.Schema.ObjectId,
+      modules: [{ type: db.Schema.Types.ObjectId, ref:'Services' }],
+      alumnes: [{ type: db.Schema.Types.ObjectId, ref:'User' }],
+      edition: { type: db.Schema.Types.ObjectId, ref:'Ediciones' },
       notas: [db.Schema.ObjectId],
       number_vc: Number,
       created_at: Number,
