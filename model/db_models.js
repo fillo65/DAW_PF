@@ -79,13 +79,16 @@ module.exports = {
     var serv = this.Services();
     var edi = this.Ediciones();
     var AulaSchema = new db.Schema({
-      modules: [{ type: db.Schema.Types.ObjectId, ref:'Services' }],
+      _id:    {type:db.Schema.ObjectId, unique:true, index: true, required: true, auto: true },
+      modules: { type: db.Schema.Types.ObjectId, ref:'Services' },
+      profes: { type: db.Schema.Types.ObjectId, ref:'User' },
       alumnes: [{ type: db.Schema.Types.ObjectId, ref:'User' }],
       edition: { type: db.Schema.Types.ObjectId, ref:'Ediciones' },
       notas: [db.Schema.ObjectId],
       number_vc: Number,
-      created_at: Number,
-      updated_at: Number
+      moodleId: Number,
+      created_at: Date,
+      updated_at: Date
     });
     AulaSchema.pre('save', function (next) {
       var currentDate = new Date().getTime();
@@ -98,6 +101,7 @@ module.exports = {
       this.updated_at = currentDate;
       next();
     });
+    AulaSchema.index({modules: 1, edition: 1},{name: "aulas_id"});
     return db.model('Aulas', AulaSchema);
   },
   Logs: function () {

@@ -1,4 +1,6 @@
 /*all setting*/
+/*negro verde: logo and links*/
+/*negro text en general*/
 /*Reset*/
 * {
   margin: 0;
@@ -33,18 +35,48 @@ body {
 h1, h2, h3, h4, h5, h6 {
   font-family: "Open Sans", sans-serif; }
 
+a {
+  color: #3E2723; }
+
 p, a, ul {
   font-family: "Roboto", sans-serif; }
+
+.dataTables_wrapper {
+  background-color: #fff;
+  padding: 15px; }
+
+.dataTables_filter {
+  height: 80px; }
+  .dataTables_filter label {
+    padding: 10px; }
+    .dataTables_filter label input {
+      display: block; }
+
+#basic-table {
+  width: 100%; }
+  #basic-table tr th {
+    padding: 0 5px;
+    color: #333333; }
+  #basic-table tr td {
+    color: #5D4037;
+    border-top: 1px solid #e3e3e3;
+    border-bottom: 1px solid #e3e3e3;
+    padding: 10px 5px; }
+  #basic-table strong {
+    font-weight: 600; }
+  #basic-table span {
+    font-size: 14px;
+    color: #F4511E;
+    font-weight: 500; }
 
 /*header*/
 nav {
   background: #fff;
   height: 49px;
   display: flex;
-  margin-bottom: 50px;
   box-shadow: 0px 15px 80px -13px rgba(204, 204, 204, 0.2); }
   nav h1 {
-    background: #5f9ea0;
+    background: #009688;
     font-size: 25px;
     padding: 10px;
     color: #fff;
@@ -59,7 +91,7 @@ nav {
 .menu-principal {
   list-style: none;
   padding: 0px;
-  margin: 0px;
+  margin: 50px 0px 0px 0px;
   display: flex;
   flex-direction: column; }
   .menu-principal li {
@@ -82,11 +114,11 @@ nav {
       height: 80%;
       max-width: 60px;
       width: 80%;
-      fill: #929292; }
+      fill: #3E2723; }
   .menu-principal a:hover {
-    border-color: #5f9ea0; }
+    border-color: #009688; }
     .menu-principal a:hover > svg {
-      fill: #5f9ea0; }
+      fill: #009688; }
 
 /*Main*/
 main {
@@ -165,7 +197,7 @@ footer {
 .page-new--servicios label, .page-new--ediciones label, .page-new--aula label, .page-new--log label, .page-new--users label {
   font-weight: bold; }
 
-.page-new--servicios input, .page-new--servicios textarea, .page-new--ediciones input, .page-new--ediciones textarea, .page-new--aula input, .page-new--aula textarea, .page-new--log input, .page-new--log textarea, .page-new--users input, .page-new--users textarea {
+.page-new--servicios input, .page-new--servicios select, .page-new--servicios textarea, .page-new--ediciones input, .page-new--ediciones select, .page-new--ediciones textarea, .page-new--aula input, .page-new--aula select, .page-new--aula textarea, .page-new--log input, .page-new--log select, .page-new--log textarea, .page-new--users input, .page-new--users select, .page-new--users textarea {
   border-radius: 5px;
   border: solid 1px #ccc;
   padding: 10px 15px;
@@ -196,3 +228,10 @@ footer {
       text-decoration: none;
       color: #000;
       opacity: 0.7; }
+
+/*================== page-aula ==================*/
+.aula {
+  padding: 10px 25px; }
+  .aula ul {
+    list-style: none;
+    padding: 0px; }

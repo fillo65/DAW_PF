@@ -8,12 +8,19 @@ $color-s-2: #95a5a6;
 $color-t: #0096d2;
 $color-t-2: #006892;
 
-$def-color-1: #929292;
+// $def-color-1: #929292;
+$def-color-1: #899192;
 $def-color-1-2: #e2e2e2;
-$def-color-1-3: #b1b1b1;
 $def-color-1-4: #f4f4f4;
 $def-color-2: #333333;
-$def-color-3: #5f9ea0;
+$def-color-3: #009688;
+$def-color-4: #5D4037;
+$def-color-5: #F4511E;
+$def-color-1: #3E2723;
+/*negro verde: logo and links*/
+$color-1: #26A69A;
+/*negro text en general*/
+$color-2: #333333;
 
 
 
@@ -56,18 +63,57 @@ body{
 h1,h2,h3,h4,h5,h6{
   font-family: $font-primary;
 }
-
+a{
+  color: $def-color-1;
+}
 p, a, ul{
   font-family: $font-secondary;
 }
-
+// .datatable{
+.dataTables_wrapper{
+  background-color: #fff;
+  padding: 15px;
+}
+.dataTables_filter{
+  height: 80px;
+  label{
+    padding: 10px;
+    input{
+      display: block;
+    }
+  }
+}
+#basic-table{
+  width: 100%;
+  tr{
+    th{
+      padding: 0 5px;
+      color:$def-color-2;
+    }
+    td{
+      color:$def-color-4;
+      border-top: 1px solid #e3e3e3;
+      border-bottom: 1px solid #e3e3e3;
+      padding: 10px 5px;
+    }
+    &:nth-child(even){
+      // background: ;
+    }
+  }
+  strong{
+    font-weight: 600;
+  }
+  span{
+    font-size: 14px;
+    color: $def-color-5;
+    font-weight: 500;
+  }
+}
 /*header*/
 nav{
   background:#fff;
   height: $h_nav;
   display: flex;
-  margin-bottom: 50px;
-  // box-shadow: 00px 15px 20px 7px rgba(0,0,0,0.16), 00px 15px 20px 7px rgba(0,0,0,0.12);
   box-shadow: 0px 15px 80px -13px rgba(204, 204, 204, 0.2);
   h1{
     background: $def-color-3;
@@ -89,7 +135,7 @@ nav{
 .menu-principal{
   list-style: none;
   padding: 0px;
-  margin:0px;
+  margin:50px 0px 0px 0px;
   display: flex;
   flex-direction: column;
   li{
@@ -227,6 +273,7 @@ footer{
   &--aula,
   &--log,
   &--users{
+
     h4{
       margin: 0 0 30px 0;
     }
@@ -238,7 +285,7 @@ footer{
       font-weight: bold;
       // text-align: left;
     }
-    input, textarea{
+    input, select, textarea{
       border-radius: 5px;
       border:solid 1px $color-p;
       padding: 10px 15px;
@@ -277,5 +324,15 @@ footer{
         opacity: 0.7;
       }
     }
+  }
+}
+
+
+/*================== page-aula ==================*/
+.aula{
+  padding: 10px 25px;
+  ul{
+    list-style: none;
+    padding: 0px;
   }
 }

@@ -1,27 +1,27 @@
 <% layout('../templates/principal') -%>
-<div class="container">
-  <h4>Aulas</h4>
-  <div class="col-xs-12">
-    <a href="/aulas/new">Crear Aula</a>
-  </div>
-  <div class="col-sm-8 push-sm-1">
-    <table>
-      <tr>
-        <th> Edición </th>
-        <th> Modulo </th>
-        <th> Nombre </th>
-      </tr>
-      <% data.forEach(function(reg){ %>
+<div class="container aula">
+  <h4>Aulas <a href="/aulas/new">Crear Aula</a></h4>
+  <div>
+
+  </div class="col-12">
+  <div>
+    <table id="basic-table">
+      <thead>
         <tr>
-          <td>
-            <%= reg.edition.yearC %>-<%= reg.edition.monthC %> <%= reg.edition.Service %>
-          </td>
-          <td>
-            <ul>
-              <% reg.modules.forEach(function(regi){ %>
-                <li><%= regi.name %></li>
-                <% }) %>
-              </ul>
+          <th> Modulo </th>
+          <th> Nombre </th>
+          <th> Nombre </th>
+          <th> Nombre </th>
+        </tr>
+      </thead>
+      <tbody>
+        <% data.forEach(function(reg){ %>
+          <tr>
+            <td>
+              <strong><%= reg.modules.name %></strong><br>
+              <span>
+                <%= reg.edition.yearC %>-<%= reg.edition.monthC %> <%= reg.edition.Service %>
+              </span>
             </td>
             <td>
               <ul>
@@ -41,7 +41,8 @@
               </td>
             </tr>
             <% }) %>
-          </table>
-        </div>
-
+          </tbody>
+        </table>
       </div>
+
+    </div>

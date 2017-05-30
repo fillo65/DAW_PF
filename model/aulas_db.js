@@ -12,10 +12,12 @@ module.exports = {
     return res;
   },
   findById: function (id) {
-    return Aulas.findById({_id: id});
+    // return Aulas.findById({_id: id});
+    let aulas = Aulas.findById({_id: id}).populate('modules alumnes edition profes') ;
+    return aulas;
   },
   findAll: function () {
-    let aulas = Aulas.find({}).populate('modules alumnes edition') ;
+    let aulas = Aulas.find({}).populate('modules alumnes edition profes') ;
     return aulas;
   },
   updateData: function (reg, id) {

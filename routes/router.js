@@ -102,7 +102,7 @@ module.exports = function(app, passport){
     var AulasModel = require('../model/aulas_db');
     AulasModel.findAll().exec(function (err, data) {
       if (!err) {
-        console.log(data);
+        // console.log(data);
         res.render('2.aulas/aula_main', {data: data});
       } else {
         console.log(err);
@@ -111,17 +111,22 @@ module.exports = function(app, passport){
   });
   app.get('/aulas/new', isLoggedIn, function(req, res) {
     var ServiciosModel = require('../model/services_db');
-    UserModel.findAll().where("role").equals("Estudiante").exec(function (err, data_users) {
-      console.log(err);
+    UserModel.findAll().where("role").equals("Profesor").exec(function (err, data_teacher) {
       if (!err) {
-        data_users = data_users;
-        ServiciosModel.findAll().where("type").equals("Curso").exec(function (err, cursos) {
+        UserModel.findAll().where("role").equals("Estudiante").exec(function (err, data_users) {
           if (!err) {
-            var EdicionesModel = require('../model/editions_db');
-            EdicionesModel.findAll().exec(function (err, editions) {
-              console.log(err);
+            data_users = data_users;
+            ServiciosModel.findAll().where("type").equals("Curso").exec(function (err, cursos) {
               if (!err) {
-                res.render('2.aulas/aula_new', {users: data_users, cursos: cursos, editions:editions});
+                var EdicionesModel = require('../model/editions_db');
+                EdicionesModel.findAll().exec(function (err, editions) {
+                  console.log(err);
+                  if (!err) {
+                    res.render('2.aulas/aula_new', {users: data_users,profes:data_teacher, cursos: cursos, editions:editions});
+                  } else {
+                    console.log(err);
+                  }
+                });
               } else {
                 console.log(err);
               }
@@ -145,19 +150,46 @@ module.exports = function(app, passport){
     }
   });
 
+  var AulasModel = require('../model/aulas_db');
   app.get('/aulas/edit/:id', isLoggedIn, function(req, res) {
-    var AulasModel = require('../model/aulas_db');
-    AulasModel.findById(req.params.id).exec(function (err, result) {
+    AulasModel.findById(req.params.id).exec(function (err, data) {
       if (!err) {
-        res.render('2.aulas/aula_edit', {data: result});
+        var ServiciosModel = require('../model/services_db');
+        UserModel.findAll().where("role").equals("Profesor").exec(function (err, data_teachers) {
+          if (!err) {
+            UserModel.findAll().where("role").equals("Estudiante").exec(function (err, data_users) {
+              if (!err) {
+                data_users = data_users;
+                ServiciosModel.findAll().where("type").equals("Curso").exec(function (err, cursos) {
+                  if (!err) {
+                    var EdicionesModel = require('../model/editions_db');
+                    EdicionesModel.findAll().exec(function (err, editions) {
+                      console.log(err);
+                      if (!err) {
+                        res.render('2.aulas/aula_edit', {data: data ,users: data_users, profes:data_teachers, cursos: cursos, editions:editions});
+                      } else {
+                        console.log(err);
+                      }
+                    });
+                  } else {
+                    console.log(err);
+                  }
+                });
+              } else {
+                console.log(err);
+              }
+            });
+          } else {
+            console.log("err");
+          }
+        });
       } else {
-        console.log("err");
+        console.log(err);
       }
     });
   });
 
   app.put('/aulas/:id', isLoggedIn, function(req, res) {
-    var AulasModel = require('../model/aulas_db');
     AulasModel.findById(req.params.id).exec(function (err, result) {
       if (!err) {
         console.log("updating...");
