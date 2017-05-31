@@ -3,48 +3,54 @@
   <h4>Configuración</h4>
   <hr>
   <div class="row settings">
+    <!--
     <div class="col-sm-6 settings--panel">
       <h5>Sobre el Panel</h5>
-      <form class="post" action="#" method="post">
+      <form class="post" action="/config" method="post">
         <div class="form-group row">
           <label class="col-sm-6" for="name">Calendario Principal</label>
+          <%= data %>
           <select class="col-sm-5 custom-select">
             <% calendars.forEach(function(reg){ %>
+              <% if(data.calendar > 0){ %>
                 <% if(String(reg._id) == String(data.calendar._id)){ %>
                   <option value="<%= reg._id %>" selected><%= reg.name %></option>
                   <% } else{ %>
                     <option value="<%= reg._id %>"><%= reg.name %></option>
-                  <% } %>
-                  <% }) %>
-                </select>
-              </div>
-              <div class="form-group row">
-                <label class="col-sm-6" for="name">Numero de Aulas Recientes</label>
-                <input class="col-sm-5 custom-select" type="number" max="5" name="numberAulas" value="5">
-              </div>
-              <div class="form-group row">
-                <label class="col-sm-6" for="name">Numero de Usuarios Recientes</label>
-                <input class="col-sm-5 custom-select" type="number" max="6" name="numberUsers" value="6">
-              </div>
-              <div class="col-sm-6 push-sm-4">
-                <button type="submit" name="settings">Guardar</button>
-              </div>
-            </form>
-          </div>
-          <div class="col-sm-6 settings--empresa">
-            <h5>Sobre la empresa</h5>
-            <div class="row">
-              <div class="col-sm-4">
-                <a href="/config/servicios">Servicios</a>
-                <a href="/config/servicios/new">Nueva</a>
-              </div>
-              <div class="col-sm-4">
-                <a href="/config/ediciones">Ediciones</a>
-                <a href="/config/ediciones/new">Nueva</a>
+                    <% } %>
+                    <% } else{ %>
+                      <option value="<%= reg._id %>"><%= reg.name %></option>
+                      <% } %>
+                      <% }) %>
+                    </select>
+                  </div>
+                  <div class="form-group row">
+                    <label class="col-sm-6" for="name">Numero de Aulas Recientes</label>
+                    <input class="col-sm-5 custom-select" type="number" max="5" name="numberAulas" value="5">
+                  </div>
+                  <div class="form-group row">
+                    <label class="col-sm-6" for="name">Numero de Usuarios Recientes</label>
+                    <input class="col-sm-5 custom-select" type="number" max="6" name="numberUsers" value="6">
+                  </div>
+                  <div class="col-sm-6 push-sm-4">
+                    <button type="submit" name="settings">Guardar</button>
+                  </div>
+                </form>
+              </div> -->
+              <div class="col-sm-12 settings--empresa">
+                <!-- <h5>Sobre la empresa</h5> -->
+                <div class="row">
+                  <div class="col-sm-6">
+                    <a href="/config/servicios">Servicios</a>
+                    <a href="/config/servicios/new">Nueva</a>
+                  </div>
+                  <div class="col-sm-6">
+                    <a href="/config/ediciones">Ediciones</a>
+                    <a href="/config/ediciones/new">Nueva</a>
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
-        </div>
-        <hr>
+            <hr>
 
-      </div>
+          </div>
