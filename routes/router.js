@@ -375,8 +375,8 @@ module.exports = function(app, passport){
     CalendarModel.findAll().exec(function (err, cals) {
       console.log(err);
       if (!err) {
-        var CalendarModel = require('../model/calendar_db');
-        CalendarModel.findAll().exec(function (err, data) {
+        var Config = require('../model/config_db');
+        Config.findAll().exec(function (err, data) {
           console.log(err);
           if (!err) {
             res.render('5.settings/settings', {calendars: cals, data: data});
