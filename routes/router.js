@@ -246,6 +246,20 @@ module.exports = function(app, passport){
       }
     });
   });
+  /*============================  2.aulas / notas ==============================*/
+  app.get('/aulas/notas', isLoggedIn, function(req, res) {
+    var NotasModel = require('../model/notas_db');
+    NotasModel.findAll().exec(function (err, data) {
+      if (!err) {
+        res.render('2.1.notas/notas_main', {data: {}});
+      } else {
+        console.log(err);
+      }
+    });
+  });
+  app.get('/aulas/notas/new', isLoggedIn, function(req, res) {
+    res.render('2.1.notas/notas_new', {});
+  });
   /*============================  3.calendar ==============================*/
   app.get('/calendar', isLoggedIn, function(req, res) {
     var CalendarModel = require('../model/calendar_db');

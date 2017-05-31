@@ -29,6 +29,61 @@ module.exports = {
     }
     return User;
   },
+  Notas: function(){
+    var NotasSchema = new db.Schema({
+      name: String,
+      comment: String,
+      created_at: Date,
+      updated_at: Date
+    });
+
+    NotasSchema.pre('save', function (next) {
+      var currentDate = new Date();
+      this.created_at = currentDate;
+      next();
+    });
+    NotasSchema.pre('update', function (next) {
+      var currentDate = new Date();
+      this.updated_at = currentDate;
+      next();
+    });
+    let Notas;
+    if (db.models && db.models.Notas){
+      Notas = db.models.Notas;
+    }else{
+      Notas = db.model('Notas', NotasSchema);
+    }
+    return  Notas;
+  },
+  Results: function(){
+    var ResultsSchema = new db.Schema({
+      nota: { type: db.Schema.Types.ObjectId, ref:'Notas' },
+      alumnes: { type: db.Schema.Types.ObjectId, ref:'User' },
+      aula: { type: db.Schema.Types.ObjectId, ref:'User' },
+      resultado: String,
+      comment: String,
+      created_at: Date,
+      updated_at: Date
+    });
+
+    ResultsSchema.pre('save', function (next) {
+      var currentDate = new Date();
+      this.created_at = currentDate;
+      next();
+    });
+    ResultsSchema.pre('update', function (next) {
+      var currentDate = new Date();
+      this.updated_at = currentDate;
+      next();
+    });
+    let Results;
+    if (db.models && db.models.Results){
+      Results = db.models.Results;
+    }else{
+      Results = db.model('Results', ResultsSchema);
+    }
+    return  Results;
+  },
   Ediciones: function(){
     var EditionSchema = new db.Schema({
       yearC: Number,
