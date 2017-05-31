@@ -1,10 +1,11 @@
 var models = require('./db_models');
-let ediciones = models.Ediciones();
+let Calendar = models.Calendar();
+let editions = models.Ediciones();
 module.exports = {
   saveData: function (data) {
-    var editionsData = new ediciones(data);
+    var CalendarData = new Calendar(data);
     var res = true;
-    editionsData.save(function (err) {
+    CalendarData.save(function (err) {
       if (err) {
         console.log(err);
       }
@@ -12,15 +13,15 @@ module.exports = {
     return res;
     },
     findById: function (id) {
-      return ediciones.findById({_id: id}).populate('Service');
+      return Calendar.findById({_id: id}).populate("editions");
     },
     findAll: function () {
-    return ediciones.find({}).populate('Service');
+    return Calendar.find({}).populate("editions");
     },
     updateData: function (reg, id) {
       var res = true;
       reg.updated_at = new Date();
-      ediciones.findOneAndUpdate({"_id": id}, reg, function (err) {
+      Calendar.findOneAndUpdate({"_id": id}, reg, function (err) {
         if (err) {
           console.log(err);
         } else {
@@ -30,6 +31,6 @@ module.exports = {
       return res;
     },
     removeData: function (result) {
-      return ediciones.remove({"_id": result._id});
+      return Calendar.remove({"_id": result._id});
     }
   }

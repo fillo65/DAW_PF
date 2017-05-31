@@ -27,7 +27,7 @@
           <label class="col-sm-4" for="name">Edición</label>
           <select class="col-sm-6 custom-select" name="edition">
             <% editions.forEach(function(reg){ %>
-              <option value="<%= reg._id %>"><%= reg.yearC %>-<%= reg.monthC %> <%= reg.Service %></option>
+              <option value="<%= reg._id %>"><%= reg.yearC %>-<%= reg.monthC %> <%= reg.Service.name %></option>
               <% }) %>
             </select>
             <hr class="col-10">

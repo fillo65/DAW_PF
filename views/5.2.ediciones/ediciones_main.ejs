@@ -2,17 +2,20 @@
 <div class="container">
   <h4>Ediciones</h4><span><a href="/config/ediciones/new">Crear Nuevo</a></span>
   <div class="col-xs-12">
-    <table class="table">
-      <tr>
+    <table id="basic-table">
+      <thead>
         <th>Fecha </th>
         <th>Servicio </th>
         <th>Fecha de creacion </th>
-        <th colspan="2">Opciones</th>
+        <th>Opciones</th>
+        <th></th>
       </tr>
+    </thead>
+    <tbody>
       <% data.forEach(function(reg){ %>
         <tr>
           <td><%= reg.yearC %>-<%= reg.monthC %></td>
-          <td><%= reg.Service %></td>
+          <td><%= reg.Service.name %></td>
           <td><%= reg.created_at.getTime() %></td>
           <td>
             <a href="/config/ediciones/edit/<%= reg._id %>">Editar</a>
@@ -25,6 +28,7 @@
           </td>
         </tr>
         <% }) %>
+      </tbody>
       </table>
     </div>
   </div>

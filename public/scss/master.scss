@@ -110,26 +110,27 @@ p, a, ul{
   }
 }
 /*header*/
+header{
+  position: fixed;
+  background:#f4f4f4;
+  z-index: 2;
+}
 nav{
-  background:#f1f1f1;
+  background:#f4f4f4;
   text-align: center;;
-  // height: $h_nav;
   display: flex;
   width: 300px;
   margin:0 auto;
-  box-shadow: 0px 15px 80px -13px rgba(204, 204, 204, 0.2);
+
   h1{
-    // background: $def-color-3;
-    // background: $color-s;
     font-size: 35px;
     padding: 20px 0;
     color: $def-color-3;
-    // border-bottom:2px solid $def-color-3;
     text-align: center;
     display: flex;
     align-items: center;
     justify-content: center;
-    // width: 50%;
+    width: 100%;
   }
   ul{
     width: 50%;
@@ -140,7 +141,12 @@ nav{
   }
 }
 /*sidebar*/
-
+aside{
+  position: fixed !important;
+  top: 78px;
+  background:#f4f4f4;
+  z-index: 20;
+}
 .menu-principal{
   list-style: none;
   padding: 0px;
@@ -168,7 +174,6 @@ nav{
       height:80%;
       max-width: 60px;
       width:80%;
-      // fill:$color-s;
       fill:$def-color-1;
     }
   }
@@ -181,8 +186,11 @@ nav{
 }
 /*Main*/
 main{
+  // box-shadow: 0px 15px 80px -13px rgba(204, 204, 204, 0.2);
   padding-left: 60px;
   padding-top: 15px;
+  margin-left: 225px;
+  margin-top: 78px;
   .main{
     @at-root #{&}__current_aulas{
       list-style: none;
@@ -249,6 +257,8 @@ footer{
 @media only screen and (max-width : 768px) {
   main{
     padding-left: 0px;
+    margin-left: 0px;
+    margin-top: 160px;
   }
   nav{
     margin-bottom: 10px;

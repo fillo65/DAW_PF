@@ -1,5 +1,5 @@
 <% layout('../templates/principal') -%>
-<div class="container page-new--ediciones">
+<div class="page-new--ediciones">
   <div class="col-xs-12 push-md-2">
     <h4>Nueva Edición</h4>
   </div>
@@ -14,7 +14,7 @@
         <label class="col-sm-4" for="name">Servicio</label>
         <select class="col-sm-6 custom-select" name="Service" required>
           <% data.forEach(function(reg){ %>
-            <option value="<%= reg.name %>"><%= reg.type %> <%= reg.name %></option>
+            <option value="<%= reg._id %>"><%= reg.type %> <%= reg.name %></option>
             <% }) %>
           </select>
         </div>

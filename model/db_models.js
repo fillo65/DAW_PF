@@ -33,7 +33,7 @@ module.exports = {
     var EditionSchema = new db.Schema({
       yearC: Number,
       monthC: Number,
-      Service: String,
+      Service: { type: db.Schema.Types.ObjectId, ref:'Services' },
       created_at: Date,
       updated_at: Date
     });
@@ -60,7 +60,7 @@ module.exports = {
     var ConfigSchema = new db.Schema({
       num_aulas: Number,
       num_users: Number,
-      fk_calendar: { type: db.Schema.Types.ObjectId, ref:'Calendar' },
+      calendar: { type: db.Schema.Types.ObjectId, ref:'Calendar' },
       created_at: Date,
       updated_at: Date
     });
@@ -75,13 +75,40 @@ module.exports = {
       this.updated_at = currentDate;
       next();
     });
-    let Editions;
+    let config;
     if (db.models && db.models.Config){
-      Editions = db.models.Config;
+      config = db.models.Config;
     }else{
-      Editions = db.model('Config', ConfigSchema);
+      config = db.model('Config', ConfigSchema);
     }
-    return  Editions;
+    return  config;
+  },
+  Calendar: function(){
+    var CalendarSchema = new db.Schema({
+      name: String,
+      editions: [{ type: db.Schema.Types.ObjectId, ref:'Ediciones' }],
+      created_at: Date,
+      updated_at: Date
+    });
+
+    CalendarSchema.pre('save', function (next) {
+      var currentDate = new Date().getTime();
+      this.created_at = currentDate;
+      this.updated_at = currentDate;
+      next();
+    });
+    CalendarSchema.pre('update', function (next) {
+      var currentDate = new Date().getTime();
+      this.updated_at = currentDate;
+      next();
+    });
+    let config;
+    if (db.models && db.models.Calendar){
+      config = db.models.Calendar;
+    }else{
+      config = db.model('Calendar', CalendarSchema);
+    }
+    return  config;
   },
   Services: function(){
     var schema = new db.Schema({

@@ -4,12 +4,14 @@
 <body>
   <div class="container-fluid h-100 ctm--padding-0">
     <div class="row ctm--margin-left-right-0">
-      <div class="w-100">
+      <header class="w-100">
         <% include ../includes/header.ejs %>
-      </div>
+      </header>
       <% include ../includes/sidebar.ejs %>
       <main class="col-xs-12 col-sm-12 col-md-9 col-lg-10">
-        <%- body %>
+        <div class="container-fluid">
+          <%- body %>
+        </div>
       </main>
       <% include ../includes/footer.ejs %>
     </div>

@@ -1,36 +1,36 @@
 <% layout('../templates/principal') -%>
-<div class="col-xs-12 text-center">
+<div class="col-sm-12">
   <h3>Registro del proyecto</h3>
+  <a href="/log/new">Nuevo</a>
 </div>
-<div class="col-sm-3">
-  <ul>
-    <li><a href="/log/new">Nuevo</a></li>
-  </ul>
-</div>
-<div class="col-sm-9">
-  <table>
-    <tr>
-      <th> Fecha </th>
-      <th> Titulo </th>
-      <th> Comentarios </th>
-      <th> Editar </th>
-      <th> Borrar </th>
-    </tr>
-    <% logs.forEach(function(reg){ %>
+<div class="col-sm-12">
+  <table id="basic-table">
+    <thead>
       <tr>
-        <td><%= reg.created_at %></td>
-        <td><%= reg.title %></td>
-        <td><%= reg.description %></td>
-        <td>
-          <a href="/log/edit/<%= reg._id %>">Editar</a>
-        </td>
-        <td>
-          <form method="POST" action='/log/edit/<%= reg._id %>' enctype='application/x-www-form-urlencoded' >
-            <input type='hidden' value='DELETE' name='_method' />
-            <button type="submit"> DELETE </button>
-          </form>
-        </td>
+        <th> Fecha </th>
+        <th> Titulo </th>
+        <th> Comentarios </th>
+        <th> Editar </th>
+        <th> Borrar </th>
       </tr>
-      <% }) %>
+    </thead>
+    <tbody>
+      <% logs.forEach(function(reg){ %>
+        <tr>
+          <td><%= reg.created_at %></td>
+          <td><%= reg.title %></td>
+          <td><%= reg.description %></td>
+          <td>
+            <a href="/log/edit/<%= reg._id %>">Editar</a>
+          </td>
+          <td>
+            <form method="POST" action='/log/edit/<%= reg._id %>' enctype='application/x-www-form-urlencoded' >
+              <input type='hidden' value='DELETE' name='_method' />
+              <button type="submit"> DELETE </button>
+            </form>
+          </td>
+        </tr>
+        <% }) %>
+      </tbody>
     </table>
-</div>
+  </div>

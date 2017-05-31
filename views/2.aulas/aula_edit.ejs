@@ -36,9 +36,9 @@
                     <select class="col-sm-6 custom-select" name="edition">
                       <% editions.forEach(function(reg){ %>
                         <% if(String(data.edition._id) == String(reg._id)){ %>
-                          <option selected value="<%= reg._id %>"><%= reg.yearC %>-<%= reg.monthC %> <%= reg.Service %></option>
+                          <option selected value="<%= reg._id %>"><%= reg.yearC %>-<%= reg.monthC %> <%= reg.Service.name %></option>
                           <% }else{ %>
-                            <option value="<%= reg._id %>"><%= reg.yearC %>-<%= reg.monthC %> <%= reg.Service %></option>
+                            <option value="<%= reg._id %>"><%= reg.yearC %>-<%= reg.monthC %> <%= reg.Service.name %></option>
                             <% } %>
                             <% }) %>
                           </select>

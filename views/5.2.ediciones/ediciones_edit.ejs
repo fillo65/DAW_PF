@@ -1,5 +1,5 @@
 <% layout('../templates/principal') -%>
-<div class="container page-users--new">
+<div class="page-new--ediciones">
   <div class="col-xs-12 push-md-2">
     <h4>Editar Servicio</h4>
   </div>
@@ -14,10 +14,10 @@
         <label class="col-sm-4" for="name">Servicio</label>
         <select class="col-sm-6 custom-select" name="Service" required>
           <% data_services.forEach(function(reg){ %>
-            <% if(reg.name == data.Service){ %>
-              <option value="<%= reg.name %>" selected><%= reg.name %></option>
+            <% if(String(reg._id) == String(data.Service._id)){ %>
+              <option value="<%= reg._id %>" selected><%= reg.name %></option>
               <% } else{ %>
-                <option value="<%= reg.name %>"><%= reg.name %></option>
+                <option value="<%= reg._id %>"><%= reg.name %></option>
                 <% } %>
                 <% }) %>
               </select>

@@ -1,24 +1,66 @@
 <% layout('../templates/principal') -%>
-<h2 style="margin: 15px">Crear un registro de actividad</h2>
-<form method="POST" style="margin:100px 0" action="/log">
-  <div class="row">
-    <div class="col-xs-8">
-      <label>
-        Titulo:
-      </label><br/>
-      <input style="width: 100%" type="text" name="title"/>
+<div class="container page-new--aula">
+  <div class="col-xs-12 push-md-2">
+    <h4>Nueva Aula</h4>
+  </div>
+  <div class="col-xs-12">
+    <form action="/calendar" method="post">
+      <div class="form-group row">
+        <label class="col-sm-4" for="name">Nombre</label>
+        <input class="col-sm-6" type="text" name="name" placeholder="Calendar mar-2016" value="">
+        <hr class="col-10">
+        <label class="col-sm-12" for="name">Ediciones</label>
+        <div class="col-sm-12">
+          <select multiple id="custom-headers" class="searchable" name="editions[]">
+            <% data.forEach(function(reg){ %>
+              <option value="<%= reg._id %>"><%= reg.yearC %>-<%= reg.monthC %> <%= reg.Service.name %></option>
+              <% }) %>
+            </select>
+          </div>
+        </div>
+        <div class="col-sm-6 push-sm-5">
+          <button type="submit" name="registrer">Guardar</button>
+        </div>
+      </form>
     </div>
   </div>
-  <div class="row">
-    <div class="col-xs-12 col-lg-8">
-      <label>Descripción</label><br>
-      <textarea name="description"  style="width:100%;min-height: 100px;"></textarea>
-    </div>
-  </div>
-  <br>
-  <div class="row text-center">
-    <div class="col-xs-12 col-lg-8">
-      <input type="submit" class="btn btn-success btn-lg" value="guardar"/>
-    </div>
-  </div>
-</form>
+  <script src="js/bootstrap_v3.js" charset="utf-8"></script>
+  <script src="/js/jquery.multi-select.js" charset="utf-8"></script>
+  <script src="/js/jquery.quicksearch.js" charset="utf-8"></script>
+  <script type="text/javascript">
+  $('.searchable').multiSelect({
+    selectableHeader: "<input type='text' class='search-input' autocomplete='off' placeholder='Filtro'>",
+    selectionHeader: "<input type='text' class='search-input' autocomplete='off' placeholder='Filtro'>",
+    afterInit: function(ms){
+      var that = this,
+      $selectableSearch = that.$selectableUl.prev(),
+      $selectionSearch = that.$selectionUl.prev(),
+      selectableSearchString = '#'+that.$container.attr('id')+' .ms-elem-selectable:not(.ms-selected)',
+      selectionSearchString = '#'+that.$container.attr('id')+' .ms-elem-selection.ms-selected';
+
+      that.qs1 = $selectableSearch.quicksearch(selectableSearchString)
+      .on('keydown', function(e){
+        if (e.which === 40){
+          that.$selectableUl.focus();
+          return false;
+        }
+      });
+
+      that.qs2 = $selectionSearch.quicksearch(selectionSearchString)
+      .on('keydown', function(e){
+        if (e.which == 40){
+          that.$selectionUl.focus();
+          return false;
+        }
+      });
+    },
+    afterSelect: function(){
+      this.qs1.cache();
+      this.qs2.cache();
+    },
+    afterDeselect: function(){
+      this.qs1.cache();
+      this.qs2.cache();
+    }
+  });
+  </script>

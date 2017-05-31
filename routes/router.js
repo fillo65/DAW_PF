@@ -102,7 +102,6 @@ module.exports = function(app, passport){
     var AulasModel = require('../model/aulas_db');
     AulasModel.findAll().exec(function (err, data) {
       if (!err) {
-        // console.log(data);
         res.render('2.aulas/aula_main', {data: data});
       } else {
         console.log(err);
@@ -239,15 +238,67 @@ module.exports = function(app, passport){
   });
   /*============================  3.calendar ==============================*/
   app.get('/calendar', isLoggedIn, function(req, res) {
-    // var CalendarModel = require('../model/calendar_db');
-    // CalendarModel.findAll().exec(function (err, data) {
-    // console.log(err);
-    // if (!err) {
-    res.render('3.calendar/calendar_main', {});
-    // } else {
-    //   console.log(err);
-    // }
-    // });
+    var CalendarModel = require('../model/calendar_db');
+    CalendarModel.findAll().exec(function (err, data) {
+      console.log(err);
+      if (!err) {
+        res.render('3.calendar/calendar_main', {data: data});
+      } else {
+        console.log(err);
+      }
+    });
+  });
+  app.post('/calendar', isLoggedIn, function(req, res) {
+    var Calendar = require('../model/calendar_db');
+    if (Calendar.saveData(req.body)) {
+      res.redirect('/calendar');
+    } else {
+      res.redirect('/calendar/new');
+    }
+  });
+  app.get('/calendar/new', isLoggedIn, function(req, res) {
+    var Editions = require('../model/editions_db');
+    Editions.findAll().exec(function (err, editions) {
+      if (!err) {
+        res.render('3.calendar/calendar_new', {data: editions});
+      } else {
+        console.log(err);
+      }
+    });
+  });
+  app.get('/calendar/edit/:id', isLoggedIn, function(req, res) {
+    var Calendar = require('../model/calendar_db');
+    Calendar.findById(req.params.id).exec(function (err, result) {
+      if (!err) {
+        var Editions = require('../model/editions_db');
+        Editions.findAll().exec(function (err, editions) {
+          if (!err) {
+            res.render('3.calendar/calendar_edit', {data: result, data_editions: editions});
+          } else {
+            console.log(err);
+          }
+        });
+      } else {
+        console.log("err");
+      }
+    });
+  });
+  app.delete('/calendar/edit/:id', isLoggedIn, function(req, res) {
+    var Calendar = require('../model/calendar_db');
+    Calendar.findById(req.params.id).exec(function (err, result) {
+      if (!err) {
+        Calendar.removeData(result).exec(function (err) {
+          if (err) {
+            console.log("!err");
+            res.send(err.message);
+          } else {
+            res.redirect('/calendar');
+          }
+        });
+      } else {
+        console.log("err");
+      }
+    });
   });
   /*============================  4.logs ==============================*/
   app.get('/log', isLoggedIn, function(req, res) {
@@ -320,170 +371,179 @@ module.exports = function(app, passport){
 
   /*============================  5.config ==============================*/
   app.get('/config', isLoggedIn, function(req, res) {
-    // var CalendarModel = require('../model/calendar_db');
-    // CalendarModel.findAll().exec(function (err, data) {
-    // console.log(err);
-    // if (!err) {
-    res.render('5.settings/settings', {});
-    // } else {
-    //   console.log(err);
-    // }
-    // });
-  });
-
-  /*============================  5.config servicios ==============================*/
-  app.get('/config/servicios', isLoggedIn, function(req, res) {
-    var ServiciosModel = require('../model/services_db');
-    ServiciosModel.findAll().exec(function (err, data) {
+    var CalendarModel = require('../model/calendar_db');
+    CalendarModel.findAll().exec(function (err, cals) {
       console.log(err);
       if (!err) {
-        res.render('5.1.servicios/servicios_main', {data: data});
-      } else {
-        console.log(err);
-      }
-    });
-  });
-
-  app.get('/config/servicios/new', isLoggedIn, function(req, res) {
-    res.render('5.1.servicios/servicios_new', {});
-  });
-
-  app.post('/config/servicios', isLoggedIn, function(req, res) {
-    var Service = require('../model/services_db');
-    if (Service.saveData(req.body)) {
-      res.redirect('/config/servicios');
-    } else {
-      res.redirect('/config/servicios/new');
-    }
-  });
-
-  app.get('/config/servicios/edit/:id', isLoggedIn, function(req, res) {
-    var Service = require('../model/services_db');
-    Service.findById(req.params.id).exec(function (err, result) {
-      if (!err) {
-        res.render('5.1.servicios/servicios_edit', {data: result});
-      } else {
-        console.log("err");
-      }
-    });
-  });
-
-  app.delete('/config/servicios/edit/:id', isLoggedIn, function(req, res) {
-    var Service = require('../model/services_db');
-    Service.findById(req.params.id).exec(function (err, result) {
-      if (!err) {
-        Service.removeData(result).exec(function (err) {
-          if (err) {
-            console.log("!err");
-            res.send(err.message);
-          } else {
-            res.redirect('/config/servicios');
-          }
-        });
-      } else {
-        console.log("err");
-      }
-    });
-  });
-
-  app.put('/config/servicios/:id', isLoggedIn, function(req, res) {
-    var Service = require('../model/services_db');
-    Service.findById(req.params.id).exec(function (err, result) {
-      if (!err) {
-        console.log("updating...");
-        if (Service.updateData(req.body, req.params.id)) {
-          res.redirect('/config/servicios');
-        } else {
-          res.redirect('/config/servicios/edit' + req.params.id);
-        }
-      } else {
-        console.log("err");
-      }
-    });
-  });
-  /*============================  5.config ediciones ==============================*/
-  app.get('/config/ediciones', isLoggedIn, function(req, res) {
-    var EdicionesModel = require('../model/editions_db');
-    EdicionesModel.findAll().exec(function (err, data) {
-      console.log(err);
-      if (!err) {
-        res.render('5.2.ediciones/ediciones_main', {data: data});
-      } else {
-        console.log(err);
-      }
-    });
-  });
-  app.get('/config/ediciones/new', isLoggedIn, function(req, res) {
-    var ServiciosModel = require('../model/services_db');
-    ServiciosModel.findAll().exec(function (err, data) {
-      console.log(err);
-      if (!err) {
-        res.render('5.2.ediciones/ediciones_new', {data:data});
-      } else {
-        console.log(err);
-      }
-    });
-  });
-
-  app.post('/config/ediciones', isLoggedIn, function(req, res) {
-    var Ediciones = require('../model/editions_db');
-    if (Ediciones.saveData(req.body)) {
-      res.redirect('/config/ediciones');
-    } else {
-      res.redirect('/config/ediciones/new');
-    }
-  });
-
-  app.get('/config/ediciones/edit/:id', isLoggedIn, function(req, res) {
-    var Ediciones = require('../model/editions_db');
-    Ediciones.findById(req.params.id).exec(function (err, result) {
-      if (!err) {
-        var ServiciosModel = require('../model/services_db');
-        ServiciosModel.findAll().exec(function (err, data) {
+        var CalendarModel = require('../model/calendar_db');
+        CalendarModel.findAll().exec(function (err, data) {
           console.log(err);
           if (!err) {
-            res.render('5.2.ediciones/ediciones_edit', {data: result, data_services: data});
+            res.render('5.settings/settings', {calendars: cals, data: data});
           } else {
             console.log(err);
           }
         });
-      } else {
-        console.log("err");
-      }
-    });
+      });
+    } else {
+      console.log(err);
+    }
   });
+});
 
-  app.delete('/config/ediciones/edit/:id', isLoggedIn, function(req, res) {
-    var Ediciones = require('../model/editions_db');
-    Ediciones.findById(req.params.id).exec(function (err, result) {
-      if (!err) {
-        Ediciones.removeData(result).exec(function (err) {
-          if (err) {
-            console.log("!err");
-            res.send(err.message);
-          } else {
-            res.redirect('/config/ediciones');
-          }
-        });
-      } else {
-        console.log("err");
-      }
-    });
+/*============================  5.config servicios ==============================*/
+app.get('/config/servicios', isLoggedIn, function(req, res) {
+  var ServiciosModel = require('../model/services_db');
+  ServiciosModel.findAll().exec(function (err, data) {
+    console.log(err);
+    if (!err) {
+      res.render('5.1.servicios/servicios_main', {data: data});
+    } else {
+      console.log(err);
+    }
   });
+});
 
-  app.put('/config/ediciones/:id', isLoggedIn, function(req, res) {
-    var Ediciones = require('../model/editions_db');
-    Ediciones.findById(req.params.id).exec(function (err, result) {
-      if (!err) {
-        console.log("updating...");
-        if (Ediciones.updateData(req.body, req.params.id)) {
-          res.redirect('/config/ediciones');
+app.get('/config/servicios/new', isLoggedIn, function(req, res) {
+  res.render('5.1.servicios/servicios_new', {});
+});
+
+app.post('/config/servicios', isLoggedIn, function(req, res) {
+  var Service = require('../model/services_db');
+  if (Service.saveData(req.body)) {
+    res.redirect('/config/servicios');
+  } else {
+    res.redirect('/config/servicios/new');
+  }
+});
+
+app.get('/config/servicios/edit/:id', isLoggedIn, function(req, res) {
+  var Service = require('../model/services_db');
+  Service.findById(req.params.id).exec(function (err, result) {
+    if (!err) {
+      res.render('5.1.servicios/servicios_edit', {data: result});
+    } else {
+      console.log("err");
+    }
+  });
+});
+
+app.delete('/config/servicios/edit/:id', isLoggedIn, function(req, res) {
+  var Service = require('../model/services_db');
+  Service.findById(req.params.id).exec(function (err, result) {
+    if (!err) {
+      Service.removeData(result).exec(function (err) {
+        if (err) {
+          console.log("!err");
+          res.send(err.message);
         } else {
-          res.redirect('/config/ediciones/edit' + req.params.id);
+          res.redirect('/config/servicios');
         }
-      } else {
-        console.log("err");
-      }
-    });
+      });
+    } else {
+      console.log("err");
+    }
   });
+});
+
+app.put('/config/servicios/:id', isLoggedIn, function(req, res) {
+  var Service = require('../model/services_db');
+  Service.findById(req.params.id).exec(function (err, result) {
+    if (!err) {
+      console.log("updating...");
+      if (Service.updateData(req.body, req.params.id)) {
+        res.redirect('/config/servicios');
+      } else {
+        res.redirect('/config/servicios/edit' + req.params.id);
+      }
+    } else {
+      console.log("err");
+    }
+  });
+});
+/*============================  5.config ediciones ==============================*/
+app.get('/config/ediciones', isLoggedIn, function(req, res) {
+  var EdicionesModel = require('../model/editions_db');
+  EdicionesModel.findAll().exec(function (err, data) {
+    console.log(err);
+    if (!err) {
+      res.render('5.2.ediciones/ediciones_main', {data: data});
+    } else {
+      console.log(err);
+    }
+  });
+});
+app.get('/config/ediciones/new', isLoggedIn, function(req, res) {
+  var ServiciosModel = require('../model/services_db');
+  ServiciosModel.findAll().exec(function (err, data) {
+    console.log(err);
+    if (!err) {
+      res.render('5.2.ediciones/ediciones_new', {data:data});
+    } else {
+      console.log(err);
+    }
+  });
+});
+
+app.post('/config/ediciones', isLoggedIn, function(req, res) {
+  var Ediciones = require('../model/editions_db');
+  if (Ediciones.saveData(req.body)) {
+    res.redirect('/config/ediciones');
+  } else {
+    res.redirect('/config/ediciones/new');
+  }
+});
+
+app.get('/config/ediciones/edit/:id', isLoggedIn, function(req, res) {
+  var Ediciones = require('../model/editions_db');
+  Ediciones.findById(req.params.id).exec(function (err, result) {
+    if (!err) {
+      var ServiciosModel = require('../model/services_db');
+      ServiciosModel.findAll().exec(function (err, data) {
+        console.log(err);
+        if (!err) {
+          res.render('5.2.ediciones/ediciones_edit', {data: result, data_services: data});
+        } else {
+          console.log(err);
+        }
+      });
+    } else {
+      console.log("err");
+    }
+  });
+});
+
+app.delete('/config/ediciones/edit/:id', isLoggedIn, function(req, res) {
+  var Ediciones = require('../model/editions_db');
+  Ediciones.findById(req.params.id).exec(function (err, result) {
+    if (!err) {
+      Ediciones.removeData(result).exec(function (err) {
+        if (err) {
+          console.log("!err");
+          res.send(err.message);
+        } else {
+          res.redirect('/config/ediciones');
+        }
+      });
+    } else {
+      console.log("err");
+    }
+  });
+});
+
+app.put('/config/ediciones/:id', isLoggedIn, function(req, res) {
+  var Ediciones = require('../model/editions_db');
+  Ediciones.findById(req.params.id).exec(function (err, result) {
+    if (!err) {
+      console.log("updating...");
+      if (Ediciones.updateData(req.body, req.params.id)) {
+        res.redirect('/config/ediciones');
+      } else {
+        res.redirect('/config/ediciones/edit' + req.params.id);
+      }
+    } else {
+      console.log("err");
+    }
+  });
+});
 };

@@ -1,16 +1,20 @@
 <% layout('../templates/principal') -%>
-<div class="container">
-  <h4>Usuarios</h4>
-  <div class="col-xs-12">
-    <a href="/users/new">Crear Usuario</a>
-  </div>
-  <div class="col-sm-8 push-sm-1">
-    <table>
+<h4>Usuarios</h4>
+<div class="col-xs-12">
+  <a href="/users/new">Crear Usuario</a>
+</div>
+<div class="col-sm-8 push-sm-1">
+  <table id="basic-table">
+    <thead>
       <tr>
         <th> Rol </th>
         <th> Correo Electrónico </th>
         <th> Nombre </th>
+        <th> Opciones </th>
+        <th> Opciones </th>
       </tr>
+    </thead>
+    <tbody>
       <% data.forEach(function(reg){ %>
         <tr>
           <td><%= reg.role %></td>
@@ -27,7 +31,6 @@
           </td>
         </tr>
         <% }) %>
-      </table>
-    </div>
-
+      </tbody>
+    </table>
   </div>

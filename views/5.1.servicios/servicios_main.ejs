@@ -2,22 +2,26 @@
 <div class="container">
   <h4>Servicios</h4><span><a href="/config/servicios/new">Crear Nuevo</a></span>
   <div class="col-xs-12">
-    <table class="table">
+    <table id="basic-table">
+      <thead>
       <tr>
         <th> Nombre </th>
         <th> Precio </th>
         <th> Tipo </th>
         <th> Prefijo VC </th>
-        <th> Fecha Creacion </th>
-        <th colspan="2"> Opciones </th>
+        <th> Fecha de Modificación</th>
+        <th> Opciones </th>
+        <th> </th>
       </tr>
+    </thead>
+    <tbody>
       <% data.forEach(function(reg){ %>
         <tr>
           <td><%= reg.name %></td>
           <td><%= reg.price %></td>
           <td><%= reg.type %></td>
           <td><%= reg.prefix %></td>
-          <td><%= reg.created_at.getTime() %></td>
+          <td><%= reg.created_at %></td>
           <td>
             <a href="/config/servicios/edit/<%= reg._id %>">Editar</a>
           </td>
@@ -29,6 +33,7 @@
           </td>
         </tr>
         <% }) %>
+      </tbody>
       </table>
   </div>
 
