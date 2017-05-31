@@ -111,23 +111,32 @@ p, a, ul{
 }
 /*header*/
 nav{
-  background:#fff;
-  height: $h_nav;
+  background:#f1f1f1;
+  text-align: center;;
+  // height: $h_nav;
   display: flex;
+  width: 300px;
+  margin:0 auto;
   box-shadow: 0px 15px 80px -13px rgba(204, 204, 204, 0.2);
   h1{
-    background: $def-color-3;
+    // background: $def-color-3;
     // background: $color-s;
-    font-size: 25px;
-    padding: 10px;
-    color: #fff;
+    font-size: 35px;
+    padding: 20px 0;
+    color: $def-color-3;
+    // border-bottom:2px solid $def-color-3;
     text-align: center;
     display: flex;
     align-items: center;
     justify-content: center;
+    // width: 50%;
   }
   ul{
+    width: 50%;
+    display: none;
     list-style: none;
+    // border-bottom:2px solid $def-color-1;
+    margin: 0;
   }
 }
 /*sidebar*/
@@ -135,7 +144,7 @@ nav{
 .menu-principal{
   list-style: none;
   padding: 0px;
-  margin:50px 0px 0px 0px;
+  margin:0px 0px 0px 0px;
   display: flex;
   flex-direction: column;
   li{
@@ -331,8 +340,26 @@ footer{
 /*================== page-aula ==================*/
 .aula{
   padding: 10px 25px;
+  @at-root #{&}-sync{
+    @at-root #{&}--external{
+      margin-top: 20px;
+      color:$color-1;
+      background: #fff;
+      border-left: 1px solid $color-1;
+    }
+    @at-root #{&}--local{
+      border-right: 1px solid $color-2;
+      margin-top: 20px;
+      color:$color-2;
+      background: #fff;
+    }
+  }
   ul{
     list-style: none;
     padding: 0px;
+  }
+  .aulas--icon svg{
+    width: 40px;
+    height: 50px;
   }
 }

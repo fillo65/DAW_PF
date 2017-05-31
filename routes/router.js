@@ -188,7 +188,23 @@ module.exports = function(app, passport){
       }
     });
   });
-
+  app.get('/aulas/sync', isLoggedIn, function(req, res) {
+    res.redirect('/aulas');
+  });
+  app.get('/aulas/sync/:id', isLoggedIn, function(req, res) {
+    AulasModel.findById(req.params.id).exec(function (err, result) {
+      if (!err) {
+        let apiSql = require("../config/api_sql.js");
+        apiSql.getUsersByAula(result.moodleId).then(function(rows){
+          res.render("2.aulas/aula_sync", {data:result, external: rows});
+        }).catch(function(err) {
+          console.log(err);
+        });
+      } else {
+        console.log("err");
+      }
+    });
+  });
   app.put('/aulas/:id', isLoggedIn, function(req, res) {
     AulasModel.findById(req.params.id).exec(function (err, result) {
       if (!err) {

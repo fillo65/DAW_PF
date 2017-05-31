@@ -1,0 +1,26 @@
+<% layout('../templates/principal') -%>
+<div class="container aula-sync">
+  <div class="row">
+    <div class="col-12 text-center">
+      <a href="javascript:location.reload();" class="btn btn-warning">Sincronizar!</a>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-6 aula-sync--local">
+      <h4>Alumnes Panel Gestión</h4>
+      <ul>
+        <% data.alumnes.forEach(function(reg){ %>
+          <li><%= reg.email %></li>
+          <% }) %>
+        </ul>
+      </div>
+      <div class="col-sm-6 aula-sync--external">
+        <h4>Alumnes Moodle</h4>
+        <ul>
+          <% external.forEach(function(reg){ %>
+            <li><%= reg.test %></li>
+            <% }) %>
+          </ul>
+        </div>
+      </div>
+    </div>

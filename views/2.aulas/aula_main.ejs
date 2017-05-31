@@ -10,6 +10,7 @@
         <tr>
           <th> Modulo </th>
           <th> Nombre </th>
+          <th> Sync </th>
           <th> Nombre </th>
           <th> Nombre </th>
         </tr>
@@ -29,6 +30,9 @@
                   <li><%= regi.email %></li>
                   <% }) %>
                 </ul>
+              </td>
+              <td>
+                <a class="aulas--icon" href="/aulas/sync/<%= reg._id %>"><svg class="lnr lnr-sync"><use xlink:href="#lnr-sync"></use></svg></a>
               </td>
               <td>
                 <a href="/aulas/edit/<%= reg._id %>">Editar</a>

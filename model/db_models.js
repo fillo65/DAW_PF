@@ -34,20 +34,52 @@ module.exports = {
       yearC: Number,
       monthC: Number,
       Service: String,
-      created_at: Date
+      created_at: Date,
+      updated_at: Date
     });
 
     EditionSchema.pre('save', function (next) {
-      var currentDate = new Date().getTime();
+      var currentDate = new Date();
       this.created_at = currentDate;
       next();
     });
-
+    EditionSchema.pre('update', function (next) {
+      var currentDate = new Date();
+      this.updated_at = currentDate;
+      next();
+    });
     let Editions;
     if (db.models && db.models.Ediciones){
       Editions = db.models.Ediciones;
     }else{
       Editions = db.model('Ediciones', EditionSchema);
+    }
+    return  Editions;
+  },
+  Config: function(){
+    var ConfigSchema = new db.Schema({
+      num_aulas: Number,
+      num_users: Number,
+      fk_calendar: { type: db.Schema.Types.ObjectId, ref:'Calendar' },
+      created_at: Date,
+      updated_at: Date
+    });
+
+    ConfigSchema.pre('save', function (next) {
+      var currentDate = new Date().getTime();
+      this.created_at = currentDate;
+      next();
+    });
+    ConfigSchema.pre('update', function (next) {
+      var currentDate = new Date().getTime();
+      this.updated_at = currentDate;
+      next();
+    });
+    let Editions;
+    if (db.models && db.models.Config){
+      Editions = db.models.Config;
+    }else{
+      Editions = db.model('Config', ConfigSchema);
     }
     return  Editions;
   },
@@ -58,7 +90,8 @@ module.exports = {
       type: String,
       prefix: String,
       modules: [db.Schema.ObjectId],
-      created_at: Number
+      created_at: Date,
+      updated_at: Date
     });
 
     schema.pre('save', function (next) {
@@ -66,7 +99,11 @@ module.exports = {
       this.created_at = currentDate;
       next();
     });
-
+    schema.pre('update', function (next) {
+      var currentDate = new Date().getTime();
+      this.updated_at = currentDate;
+      next();
+    });
     let Service;
     if (db.models && db.models.Services){
       Service = db.models.Services;
