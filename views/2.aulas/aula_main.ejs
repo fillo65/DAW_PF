@@ -19,7 +19,11 @@
         <% data.forEach(function(reg){ %>
           <tr>
             <td>
-              <strong><%= reg.modules.name %></strong><br>
+              <strong>
+                <a href="/aulas/<%= reg._id %>">
+                  <%= reg.modules.name %>
+                </a>
+              </strong><br>
               <span>
                 <%= reg.edition.yearC %>-<%= reg.edition.monthC %> <%= reg.edition.Service %>
               </span>

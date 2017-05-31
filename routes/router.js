@@ -69,7 +69,7 @@ module.exports = function(app, passport){
   app.get('/users/profile/:id', isLoggedIn, function(req, res) {
     UserModel.findById(req.params.id).exec(function (err, result) {
       if (!err) {
-        res.render('1.users/user_profile', {data: resul t});
+        res.render('1.users/user_profile', {data: result});
       } else {
         console.log("err");
       }
@@ -149,6 +149,18 @@ module.exports = function(app, passport){
       }
     });
   });
+
+  app.get('/aulas/:id', isLoggedIn, function(req, res) {
+    var AulasModel = require('../model/aulas_db');
+    AulasModel.findById(req.params.id).exec(function (err, result) {
+      if (!err) {
+        res.render("2.aulas/aula_single", {data:result});
+      } else {
+        console.log("err");
+      }
+    });
+  });
+
   app.post('/aulas', isLoggedIn, function(req, res) {
     console.log(req.body);
     var Aulas = require('../model/aulas_db');
@@ -248,18 +260,33 @@ module.exports = function(app, passport){
   });
   /*============================  2.aulas / notas ==============================*/
   app.get('/aulas/notas', isLoggedIn, function(req, res) {
+    res.redirect('/aulas/');
+  });
+
+  app.get('/aulas/notas/:id', isLoggedIn, function(req, res) {
     var NotasModel = require('../model/notas_db');
-    NotasModel.findAll().exec(function (err, data) {
+    NotasModel.findById(req.params.id).exec(function (err, data) {
       if (!err) {
-        res.render('2.1.notas/notas_main', {data: {}});
+        res.render('2.1.notas/notas_main', {data: data, _id: req.params.id});
       } else {
         console.log(err);
       }
     });
   });
-  app.get('/aulas/notas/new', isLoggedIn, function(req, res) {
-    res.render('2.1.notas/notas_new', {});
+  app.get('/aulas/notas/new/:id', isLoggedIn, function(req, res) {
+    res.render('2.1.notas/notas_new', {_id: req.params.id});
   });
+
+  app.post('/aulas/notas/:id', isLoggedIn, function(req, res) {
+    // console.log(req.body);
+    var Notas = require('../model/notas_db');
+    if (Notas.saveData(req.body)) {
+      res.redirect('/aulas/notas');
+    } else {
+      res.redirect('/aulas/notas/new/'+req.params.id);
+    }
+  });
+
   /*============================  3.calendar ==============================*/
   app.get('/calendar', isLoggedIn, function(req, res) {
     var CalendarModel = require('../model/calendar_db');

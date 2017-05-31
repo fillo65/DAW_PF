@@ -12,8 +12,8 @@ module.exports = {
     return res;
   },
   findById: function (id) {
-    let aulas = Notas.findById({_id: id});
-    return aulas;
+    let notas = Notas.findById({_id: id});
+    return notas;
   },
   findAll: function () {
     let aulas = Notas.find({});

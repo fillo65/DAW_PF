@@ -1,10 +1,10 @@
 var models = require('./db_models');
-var Notas = models.Notas();
+var Results = models.Results();
 module.exports = {
   saveData: function (data) {
-    var notasData = new Notas(data);
+    var resultsData = new Notas(data);
     var res = true;
-    notasData.save(function (err) {
+    resultsData.save(function (err) {
       if (err) {
         console.log(err);
       }
@@ -12,17 +12,17 @@ module.exports = {
     return res;
   },
   findById: function (id) {
-    let aulas = Notas.findById({_id: id});
+    let aulas = Results.findById({_id: id});
     return aulas;
   },
   findAll: function () {
-    let aulas = Notas.find({}).populate('modules alumnes edition profes') ;
+    let aulas = Results.find({}).populate('modules alumnes edition profes') ;
     return aulas;
   },
   updateData: function (reg, id) {
     var res = true;
     reg.updated_at = new Date();
-    Notas.findOneAndUpdate({"_id": id}, reg, function (err) {
+    Results.findOneAndUpdate({"_id": id}, reg, function (err) {
       if (err) {
         console.log(err);
       } else {
@@ -32,6 +32,6 @@ module.exports = {
     return res;
   },
   removeData: function (result) {
-    return Notas.remove({"_id": result._id});
+    return Results.remove({"_id": result._id});
   }
 }

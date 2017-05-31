@@ -1,6 +1,6 @@
 <% layout('../templates/principal') -%>
 <div class="aula">
-  <h4>Notas <a href="/aulas/notas/new">Crear Nota</a></h4>
+  <h4>Notas <a href="/aulas/notas/new/<%= _id %>">Crear Nota</a></h4>
   <div>
 
   </div class="col-12">
@@ -16,19 +16,17 @@
         </tr>
       </thead>
       <tbody>
-        <% data.forEach(function(reg){ %>
+        <% ["1","2"].forEach(function(reg){ %>
           <tr>
             <td>
-              <strong><%= reg.modules.name %></strong><br>
+              <strong><%= reg %></strong><br>
               <span>
-                <%= reg.edition.yearC %>-<%= reg.edition.monthC %> <%= reg.edition.Service %>
+
               </span>
             </td>
             <td>
               <ul>
-                <% reg.alumnes.forEach(function(regi){ %>
-                  <li><%= regi.email %></li>
-                  <% }) %>
+                <li>a</li>
                 </ul>
               </td>
               <td>

@@ -31,6 +31,7 @@ module.exports = {
   },
   Notas: function(){
     var NotasSchema = new db.Schema({
+      aula: { type: db.Schema.Types.ObjectId, ref:'Aulas' },
       name: String,
       comment: String,
       created_at: Date,
@@ -59,7 +60,7 @@ module.exports = {
     var ResultsSchema = new db.Schema({
       nota: { type: db.Schema.Types.ObjectId, ref:'Notas' },
       alumnes: { type: db.Schema.Types.ObjectId, ref:'User' },
-      aula: { type: db.Schema.Types.ObjectId, ref:'User' },
+      aula: { type: db.Schema.Types.ObjectId, ref:'Aulas' },
       resultado: String,
       comment: String,
       created_at: Date,
