@@ -69,7 +69,7 @@ module.exports = function(app, passport){
   app.get('/users/profile/:id', isLoggedIn, function(req, res) {
     UserModel.findById(req.params.id).exec(function (err, result) {
       if (!err) {
-        res.render('1.users/user_profile', {data: result});
+        res.render('1.users/user_profile', {data: resul t});
       } else {
         console.log("err");
       }
