@@ -265,7 +265,7 @@ module.exports = function(app, passport){
 
   app.get('/aulas/notas/:id', isLoggedIn, function(req, res) {
     var NotasModel = require('../model/notas_db');
-    NotasModel.findById(req.params.id).exec(function (err, data) {
+    NotasModel.findByAula(req.params.id).exec(function (err, data) {
       if (!err) {
         res.render('2.1.notas/notas_main', {data: data, _id: req.params.id});
       } else {
@@ -285,6 +285,78 @@ module.exports = function(app, passport){
     } else {
       res.redirect('/aulas/notas/new/'+req.params.id);
     }
+  });
+  app.get('/aulas/notas/edit/:id', isLoggedIn, function(req, res) {
+    var Notas = require('../model/notas_db');
+    Notas.findById(req.params.id).exec(function (err, result) {
+      if (!err) {
+        res.render('2.1.notas/notas_edit', {data: result});
+      } else {
+        console.log("err");
+      }
+    });
+  });
+
+  app.put('/aulas/notas/:idaula/:id', isLoggedIn, function(req, res) {
+    var Notas = require('../model/notas_db');
+    Notas.findById(req.params.id).exec(function (err, result) {
+      if (!err) {
+        console.log("updating...");
+        if (Notas.updateData(req.body, req.params.id)) {
+          res.redirect('/aulas/notas/'+req.params.idaula);
+        } else {
+          res.redirect('/log/edit/' + req.params.idaula);
+        }
+      } else {
+        console.log("err");
+      }
+    });
+  });
+
+  app.delete('/aulas/notas/edit/:idaula/:id', isLoggedIn, function(req, res) {
+    console.log("aquie");
+    var Notas = require('../model/notas_db');
+    Notas.findById(req.params.id).exec(function (err, result) {
+      if (!err) {
+        Notas.removeData(result).exec(function (err) {
+          if (err) {
+            console.log("!err");
+            res.send(err.message);
+          } else {
+            res.redirect('/aulas/notas/'+req.params.idaula);
+          }
+        });
+      } else {
+        console.log("err");
+      }
+    });
+  });
+  /*============================  2.aulas / notas / results ==============================*/
+  app.get('/aulas/notas/results/:idaula/:idnota', isLoggedIn, function(req, res) {
+    var Results = require('../model/results_db');
+    Results.findByAulaNota(req.params.idaula, req.params.idnota ).exec(function (err, result) {
+      if (!err) {
+        let alumnes, path;
+        if(result.length != 0){
+          path = "2.1.notas/notas_results_main";
+          res.render(path, {data: result, idnota: req.params.idnota});
+        }else{
+          var AulasModel = require('../model/aulas_db');
+          AulasModel.findById(req.params.idaula).exec(function (err, alumnes) {
+            if (!err) {
+              console.log(alumnes);
+              path = "2.1.notas/notas_results_new";
+              res.render(path, {data: result, data_a: alumnes, idnota: req.params.idnota});
+            } else {
+              console.log("err");
+            }
+          });
+        }
+        console.log(path);
+      } else {
+        console.log("err");
+      }
+    });
   });
 
   /*============================  3.calendar ==============================*/

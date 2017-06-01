@@ -1,9 +1,6 @@
 <% layout('../templates/principal') -%>
 <div class="aula">
-  <h4>Notas <a href="/aulas/notas/new/<%= _id %>">Crear Nota</a></h4>
-  <div>
-
-  </div class="col-12">
+  <h4>Notas <a href="/aulas/notas/new/">Crear Nota</a></h4>
   <div>
     <table id="basic-table">
       <thead>
@@ -15,19 +12,18 @@
         </tr>
       </thead>
       <tbody>
-        <% data.forEach(function(reg){ %>
+        <% data_a.alumnes.forEach(function(reg){ %>
           <tr>
             <td>
               <strong>  <a href="/aulas/notas/results/<%= reg.aula %>/<%= reg._id %>"><%= reg.name %></a></strong><br>
             </td>
             <td>
-              <strong><%= reg.comment %></strong><br>
+              <input type="number" name="" value="0" placeholder="nota">
             </td>
             <td>
-              <a href="/aulas/notas/edit/<%= reg._id %>">Editar</a>
             </td>
             <td>
-              <form method="POST" action='/aulas/notas/edit/<%= _id %>/<%= reg._id %>' enctype='application/x-www-form-urlencoded' >
+              <form method="POST" action='/aulas/notas/edit/<%= idnota %>/<%= reg._id %>' enctype='application/x-www-form-urlencoded' >
                 <input type='hidden' value='DELETE' name='_method' />
                 <button type="submit"> DELETE </button>
               </form>
@@ -36,6 +32,6 @@
           <% }) %>
         </tbody>
       </table>
-    </div>
-
   </div>
+
+</div>
