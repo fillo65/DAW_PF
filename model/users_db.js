@@ -18,6 +18,10 @@ module.exports = {
   findAll: function () {
     return User.find({});
   },
+  findAllnin: function (arr) {
+    console.log(arr);
+    return User.find({_id: {$nin:{arr}}});
+  },
   updateData: function (reg, id) {
     var res = true;
     reg.updated_at = new Date();

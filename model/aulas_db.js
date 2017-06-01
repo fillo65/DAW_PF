@@ -1,5 +1,8 @@
 var models = require('./db_models');
+var db = require('../database');
+var deepPopulate = require('mongoose-deep-populate')(db);
 var Aulas = models.Aulas();
+var ediciones = models.Ediciones();
 module.exports = {
   saveData: function (data) {
     var aulasData = new Aulas(data);
@@ -12,11 +15,11 @@ module.exports = {
     return res;
   },
   findById: function (id) {
-    let aulas = Aulas.findById({_id: id}).populate('modules alumnes edition profes') ;
+    let aulas = Aulas.findById({_id: id}).deepPopulate('modules alumnes edition edition.Service profes');
     return aulas;
   },
   findAll: function () {
-    let aulas = Aulas.find({}).populate('modules alumnes edition profes') ;
+    let aulas = Aulas.find({}).deepPopulate('modules alumnes edition edition.Service profes');
     return aulas;
   },
   updateData: function (reg, id) {

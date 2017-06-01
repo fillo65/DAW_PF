@@ -1,6 +1,6 @@
 <% layout('../templates/principal') -%>
 <div class="aula">
-  <h4>Aulas <a href="/aulas/new">Crear Aula</a></h4>
+  <h4>Aulas <a href="/aulas/new"><svg class="lnr lnr-plus-circle"><use xlink:href="#lnr-plus-circle"></use></svg></a></h4>
   <div>
 
   </div class="col-12">
@@ -11,7 +11,7 @@
           <th> Modulo </th>
           <th> Nombre </th>
           <th> Sync </th>
-          <th> Nombre </th>
+          <th> Editar </th>
           <th> Nombre </th>
         </tr>
       </thead>
@@ -25,7 +25,7 @@
                 </a>
               </strong><br>
               <span>
-                <%= reg.edition.yearC %>-<%= reg.edition.monthC %> <%= reg.edition.Service %>
+                <%= reg.edition.yearC %>-<%= reg.edition.monthC %> <%= reg.edition.Service.name %>
               </span>
             </td>
             <td>

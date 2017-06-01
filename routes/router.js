@@ -178,26 +178,33 @@ module.exports = function(app, passport){
         var ServiciosModel = require('../model/services_db');
         UserModel.findAll().where("role").equals("Profesor").exec(function (err, data_teachers) {
           if (!err) {
-            UserModel.findAll().where("role").equals("Estudiante").exec(function (err, data_users) {
+            filter = [];
+            data.alumnes.forEach(function(reg){
+              filter.push(reg._id);
+            });
+            console.log("filter");
+            console.log(filter);
+            console.log("filter");
+            UserModel.findAllnin(filter).where("role").equals("Estudiante").exec(function (err, data_users) {
               if (!err) {
                 data_users = data_users;
                 ServiciosModel.findAll().where("type").equals("Curso").exec(function (err, cursos) {
                   if (!err) {
                     var EdicionesModel = require('../model/editions_db');
                     EdicionesModel.findAll().exec(function (err, editions) {
-                      console.log(err);
+                      console.log("err");
                       if (!err) {
                         res.render('2.aulas/aula_edit', {data: data ,users: data_users, profes:data_teachers, cursos: cursos, editions:editions});
                       } else {
-                        console.log(err);
+                        console.log("err");
                       }
                     });
                   } else {
-                    console.log(err);
+                    console.log("err");
                   }
                 });
               } else {
-                console.log(err);
+                console.log("err");
               }
             });
           } else {

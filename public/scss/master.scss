@@ -8,7 +8,6 @@ $color-s-2: #95a5a6;
 $color-t: #0096d2;
 $color-t-2: #006892;
 
-// $def-color-1: #929292;
 $def-color-1: #899192;
 $def-color-1-2: #e2e2e2;
 $def-color-1-4: #f4f4f4;
@@ -286,7 +285,6 @@ footer{
 
 /*================== page-user ==================*/
 .page-new{
-
   &--servicios,
   &--ediciones,
   &--aula,
@@ -349,6 +347,19 @@ footer{
 
 /*================== page-aula ==================*/
 .aula{
+  h4{
+    a{
+      color: $color-1;
+      svg{
+        width: 25px;
+        height: 25px;
+
+      }
+      &:hover{
+        color: $color-2;
+      }
+    }
+  }
   padding: 10px 25px;
   @at-root #{&}-sync{
     @at-root #{&}--external{

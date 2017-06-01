@@ -12,7 +12,7 @@
         <label class="col-sm-4" for="name">Modulos</label>
         <select class="col-sm-6 custom-select" name="modules">
           <% cursos.forEach(function(reg){ %>
-            <% if(String(data.modules._id) == String(reg._id)){ %>
+            <% if(cursos.indexOf(String(reg._id))){ %>
               <option selected value="<%= reg._id %>"><%= reg.name %></option>
               <% }else{ %>
                 <option value="<%= reg._id %>"><%= reg.name %></option>

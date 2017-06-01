@@ -251,6 +251,13 @@ footer {
 /*================== page-aula ==================*/
 .aula {
   padding: 10px 25px; }
+  .aula h4 a {
+    color: #26A69A; }
+    .aula h4 a svg {
+      width: 25px;
+      height: 25px; }
+    .aula h4 a:hover {
+      color: #333333; }
   .aula-sync--external {
     margin-top: 20px;
     color: #26A69A;

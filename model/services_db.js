@@ -20,6 +20,9 @@ module.exports = {
   findAll: function () {
     return services.find({});
   },
+  findAllnin: function (arr) {
+    return services.find({modules: {$nin:{arr}}});
+  },
   updateData: function (reg, id) {
     var res = true;
     reg.updated_at = new Date();

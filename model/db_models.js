@@ -1,4 +1,5 @@
 var db = require('../database');
+var deepPopulate = require('mongoose-deep-populate')(db);
 var bcrypt = require('bcrypt-nodejs');
 module.exports = {
   User: function(){
@@ -222,6 +223,12 @@ module.exports = {
       next();
     });
     AulaSchema.index({modules: 1, edition: 1},{name: "aulas_id"});
+    AulaSchema.plugin(deepPopulate);
+    AulaSchema.methods={
+      deepPopulate:function(){
+        deepPopulate();
+      }
+    }
     return db.model('Aulas', AulaSchema);
   },
   Logs: function () {
