@@ -1,13 +1,14 @@
 <% layout('../templates/principal') -%>
-<div class=" row aula">
+<div class="row aula">
   <div class="col-12">
-    <h4><%= data.modules.name %></h4>
+    <h4>
+      <%= data.modules.name %>
+      <span>
+        <%= data.edition.yearC %>-<%= data.edition.monthC %> <%= data.edition.Service.name %>
+      </span>
+    </h4>
   </div>
   <div class="col-12 col-sm-2">
-    <h5>Edicion</h5>
-    <ul>
-      <%= data.edition.yearC %>-<%= data.edition.monthC %> <%= data.edition.Service.name %>
-    </ul>
     <h5>Profesores</h5>
     <ul>
       <li>
@@ -16,13 +17,8 @@
     </ul>
     <h5><a href="/aulas/notas/<%= data._id %>">Notas</a></h5>
     <a href="/aulas/notas/new/<%= data._id %>">Nueva Nota</a>
-    <ul>
-
-
-    </ul>
   </div>
   <div class="col-12 col-sm-10">
-    <h5>lista de Alumnos</h5>
     <table id="basic-table">
       <thead>
         <tr>

@@ -1,18 +1,17 @@
 <% layout('../templates/principal') -%>
-<h4>Usuarios</h4>
 <div class="col-xs-12">
-  <a href="/users/new">Crear Usuario</a>
+  <h4 class="page-main--addnew">Usuarios <a href="/users/new"><svg class="lnr lnr-plus-circle"><use xlink:href="#lnr-plus-circle"></use></svg></a></h4>
 </div>
-<div class="col-sm-8 push-sm-1">
+<div class="col-sm-12">
   <table id="basic-table">
     <thead>
       <tr>
         <th> Rol </th>
         <th> Correo Electrónico </th>
         <th> Nombre </th>
-        <th> Opciones </th>
-        <th> Opciones </th>
-        <th> Opciones </th>
+        <th> Perfil </th>
+        <th> Editar </th>
+        <th> Eliminar </th>
       </tr>
     </thead>
     <tbody>
@@ -20,17 +19,21 @@
         <tr>
           <td><%= reg.role %></td>
           <td><%= reg.email %></td>
-          <td><%= reg.name %></td>
+          <td>
+            
+              <%= reg.name %>
+            
+          </td>
           <td>
             <a href="/users/profile/<%= reg._id %>">ver</a>
           </td>
           <td>
             <a href="/users/edit/<%= reg._id %>">Editar</a>
           </td>
-          <td>
+          <td class="ctm-delete-btn">
             <form method="POST" action='/users/edit/<%= reg._id %>' enctype='application/x-www-form-urlencoded' >
               <input type='hidden' value='DELETE' name='_method' />
-              <button type="submit"> DELETE </button>
+              <button type="submit"> Borrar </button>
             </form>
           </td>
         </tr>

@@ -9,7 +9,21 @@ function isLoggedIn(req, res, next) {
 module.exports = function(app, passport){
   /*============================  Principal  ==============================*/
   app.get('/', isLoggedIn, function(req, res) {
-    res.render('index.ejs', {title: "Log in"});
+    var AulasModel = require('../model/aulas_db');
+    AulasModel.findFive().exec(function (err, data) {
+      if (!err) {
+        var UserModel = require('../model/users_db');
+        UserModel.findFive().exec(function (err, users) {
+          if (!err) {
+            res.render('index.ejs', {data: data, users: users});
+          } else {
+            console.log(err);
+          }
+        });
+      } else {
+        console.log(err);
+      }
+    });
   });
 
   app.get('/home', isLoggedIn, function(req, res) {
@@ -182,9 +196,6 @@ module.exports = function(app, passport){
             data.alumnes.forEach(function(reg){
               filter.push(reg._id);
             });
-            console.log("filter");
-            console.log(filter);
-            console.log("filter");
             UserModel.findAllnin(filter).where("role").equals("Estudiante").exec(function (err, data_users) {
               if (!err) {
                 data_users = data_users;
@@ -192,7 +203,6 @@ module.exports = function(app, passport){
                   if (!err) {
                     var EdicionesModel = require('../model/editions_db');
                     EdicionesModel.findAll().exec(function (err, editions) {
-                      console.log("err");
                       if (!err) {
                         res.render('2.aulas/aula_edit', {data: data ,users: data_users, profes:data_teachers, cursos: cursos, editions:editions});
                       } else {
@@ -285,7 +295,6 @@ module.exports = function(app, passport){
   });
 
   app.post('/aulas/notas/:id', isLoggedIn, function(req, res) {
-    // console.log(req.body);
     var Notas = require('../model/notas_db');
     if (Notas.saveData(req.body)) {
       res.redirect('/aulas/notas');

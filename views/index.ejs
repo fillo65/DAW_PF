@@ -1,16 +1,14 @@
 <% layout('templates/principal') -%>
-
+<h5>Usuario Recientes</h5>
+<ul class="main__recent_users row">
+  <% users.forEach(function(reg){ %>
+    <li><a class="col-3" href="/users/profile/<%= reg._id %>"><svg class="lnr lnr-user"><use xlink:href="#lnr-user"></use></svg><%= reg.name %></a></li>
+    <% }) %>
+  </ul>
+<h5>Aulas Recientes</h5>
 <ul class="main__current_aulas">
-  <li class=""><a href="#"><img src="img/test.png" class="" alt=""/>Aula_example</a></li>
-  <li class=""><a href="#"><img src="img/test.png" class="" alt=""/>Aula_example</a></li>
-  <li class=""><a href="#"><img src="img/test.png" class="" alt=""/>Aula_example</a></li>
-  <li class=""><a href="#"><img src="img/test.png" class="" alt=""/>Aula_example</a></li>
-  <li class=""><a href="#"><img src="img/test.png" class="" alt=""/>Aula_example</a></li>
-</ul>
-<h2>calendar</h2>
-<h2>Usuario Recientes</h2>
-<ul class="main__recent_users">
-  <li><a href="#"><img src="img/user.png" class="" alt=""/>User_example</a></li>
-  <li><a href="#"><img src="img/user.png" class="" alt=""/>User_example</a></li>
-  <li><a href="#"><img src="img/user.png" class="" alt=""/>User_example</a></li>
-</ul>
+  <% data.forEach(function(reg){ %>
+    <li class=""><a href="/aulas/<%= reg._id %>"><%= reg.modules.name %></a></li>
+    <% }) %>
+  </ul>
+  <!-- <h2>calendar</h2> -->

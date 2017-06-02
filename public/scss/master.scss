@@ -20,6 +20,12 @@ $def-color-1: #3E2723;
 $color-1: #26A69A;
 /*negro text en general*/
 $color-2: #333333;
+// orange details
+$color-3: #F4511E;
+// azul icons
+$color-4: #1e64f4;
+/*gris text en general*/
+$color-5: #496363;
 
 
 
@@ -84,6 +90,11 @@ p, a, ul{
 }
 #basic-table{
   width: 100%;
+  .ctm-delete-btn button{
+    background: #FFF;
+    color: $color-5;
+    font-weight: bold;
+  }
   tr{
     th{
       padding: 0 5px;
@@ -194,18 +205,13 @@ main{
     @at-root #{&}__current_aulas{
       list-style: none;
       padding: 0px;
-      margin-top: 15px;
+      margin-top: 5px;
       display: flex;
       flex-wrap: wrap;
       /*mod*/
-      img{
-        max-width: 45px;
-        padding-right: 5px;
-      }
-      /*mod*/
       li{
         padding: 0px;
-        margin: 15px;
+        margin: 7px;
         a{
           border-radius: 12px;
           box-shadow: 0 2px 5px rgba(0,0,0,.26);
@@ -238,8 +244,12 @@ main{
     }
     @at-root #{&}__recent_users{
       list-style: none;
-      img{
-        max-width: 45px;
+      a{
+        line-height: 32px;
+      }
+      svg{
+        max-width: 20px;
+        max-height: 15px;
       }
 
     }
@@ -346,21 +356,32 @@ footer{
 
 
 /*================== page-aula ==================*/
-.aula{
-  h4{
-    a{
-      color: $color-1;
-      svg{
-        width: 25px;
-        height: 25px;
+h4.page-main--addnew{
+  line-height: 50px;
+  a{
+    svg{
+      width: 25px;
+      height: 25px;
+      margin-bottom: -4px;
+      fill: $color-4;
 
-      }
       &:hover{
-        color: $color-2;
+        fill: $color-2;
       }
     }
   }
+}
+.aula{
   padding: 10px 25px;
+  h4{
+    margin-bottom: 25px;
+    span{
+      display: block;
+      font-size: 16px;
+      color:$color-5;
+      padding: 10px;
+    }
+  }
   @at-root #{&}-sync{
     @at-root #{&}--external{
       margin-top: 20px;

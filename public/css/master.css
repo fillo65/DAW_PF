@@ -1,6 +1,7 @@
 /*all setting*/
 /*negro verde: logo and links*/
 /*negro text en general*/
+/*gris text en general*/
 /*Reset*/
 * {
   margin: 0;
@@ -54,6 +55,10 @@ p, a, ul {
 
 #basic-table {
   width: 100%; }
+  #basic-table .ctm-delete-btn button {
+    background: #FFF;
+    color: #496363;
+    font-weight: bold; }
   #basic-table tr th {
     padding: 0 5px;
     color: #333333; }
@@ -144,17 +149,13 @@ main {
   main .main__current_aulas {
     list-style: none;
     padding: 0px;
-    margin-top: 15px;
+    margin-top: 5px;
     display: flex;
     flex-wrap: wrap;
-    /*mod*/
     /*mod*/ }
-    main .main__current_aulas img {
-      max-width: 45px;
-      padding-right: 5px; }
     main .main__current_aulas li {
       padding: 0px;
-      margin: 15px; }
+      margin: 7px; }
       main .main__current_aulas li a {
         border-radius: 12px;
         box-shadow: 0 2px 5px rgba(0, 0, 0, 0.26);
@@ -178,8 +179,11 @@ main {
         background-color: #2c3e50; }
   main .main__recent_users {
     list-style: none; }
-    main .main__recent_users img {
-      max-width: 45px; }
+    main .main__recent_users a {
+      line-height: 32px; }
+    main .main__recent_users svg {
+      max-width: 20px;
+      max-height: 15px; }
 
 /*footer*/
 footer {
@@ -249,15 +253,25 @@ footer {
       opacity: 0.7; }
 
 /*================== page-aula ==================*/
+h4.page-main--addnew {
+  line-height: 50px; }
+  h4.page-main--addnew a svg {
+    width: 25px;
+    height: 25px;
+    margin-bottom: -4px;
+    fill: #1e64f4; }
+    h4.page-main--addnew a svg:hover {
+      fill: #333333; }
+
 .aula {
   padding: 10px 25px; }
-  .aula h4 a {
-    color: #26A69A; }
-    .aula h4 a svg {
-      width: 25px;
-      height: 25px; }
-    .aula h4 a:hover {
-      color: #333333; }
+  .aula h4 {
+    margin-bottom: 25px; }
+    .aula h4 span {
+      display: block;
+      font-size: 16px;
+      color: #496363;
+      padding: 10px; }
   .aula-sync--external {
     margin-top: 20px;
     color: #26A69A;

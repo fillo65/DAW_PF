@@ -2,7 +2,6 @@ var models = require('./db_models');
 var Notas = models.Notas();
 module.exports = {
   saveData: function (data) {
-    console.log(data);
     var notasData = new Notas(data);
     var res = true;
     notasData.save(function (err) {

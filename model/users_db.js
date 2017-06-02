@@ -18,9 +18,12 @@ module.exports = {
   findAll: function () {
     return User.find({});
   },
+  findFive: function () {
+    return User.find({ role: "Estudiante"}).sort({'updated_at': 1}).limit(5);
+  },
   findAllnin: function (arr) {
     console.log(arr);
-    return User.find({_id: {$nin:{arr}}});
+    return User.find({ _id: { $nin:arr } });
   },
   updateData: function (reg, id) {
     var res = true;

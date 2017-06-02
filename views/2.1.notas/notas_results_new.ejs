@@ -1,14 +1,13 @@
 <% layout('../templates/principal') -%>
-<div class="aula">
-  <h4>Notas <a href="/aulas/notas/new/">Crear Nota</a></h4>
+<div class="">
+  <h4>Resultados <%= data %></h4>
   <div>
     <table id="basic-table">
       <thead>
         <tr>
-          <th> Nombre </th>
+          <th> Alumno </th>
           <th> Comentario </th>
-          <th> Editar </th>
-          <th> Borrar </th>
+          <th> Nota </th>
         </tr>
       </thead>
       <tbody>
@@ -23,16 +22,10 @@
             <td>
               <textarea name="comment"></textarea>
             </td>
-            <td>
-              <form method="POST" action='/aulas/notas/edit/<%= idnota %>/<%= reg._id %>' enctype='application/x-www-form-urlencoded' >
-                <input type='hidden' value='DELETE' name='_method' />
-                <button type="submit"> DELETE </button>
-              </form>
-            </td>
           </tr>
           <% }) %>
         </tbody>
       </table>
-  </div>
+    </div>
 
-</div>
+  </div>

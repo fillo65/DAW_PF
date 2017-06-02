@@ -1,7 +1,6 @@
 <% layout('../templates/principal') -%>
 <div class="col-sm-12">
-  <h3>Registro del proyecto</h3>
-  <a href="/log/new">Nuevo</a>
+  <h4 class="page-main--addnew">Registro del proyecto <a href="/log/new"><svg class="lnr lnr-plus-circle"><use xlink:href="#lnr-plus-circle"></use></svg></a></h4>
 </div>
 <div class="col-sm-12">
   <table id="basic-table">
@@ -17,13 +16,18 @@
     <tbody>
       <% logs.forEach(function(reg){ %>
         <tr>
-          <td><%= reg.created_at %></td>
-          <td><%= reg.title %></td>
+          <td>
+            <span style="display:none">
+              <%= reg.created_at.getTime() %>
+            </span>
+            <%= reg.created_at %>
+          </td>
+          <td><strong><%= reg.title %></strong></td>
           <td><%= reg.description %></td>
           <td>
             <a href="/log/edit/<%= reg._id %>">Editar</a>
           </td>
-          <td>
+          <td class="ctm-delete-btn">
             <form method="POST" action='/log/edit/<%= reg._id %>' enctype='application/x-www-form-urlencoded' >
               <input type='hidden' value='DELETE' name='_method' />
               <button type="submit"> DELETE </button>

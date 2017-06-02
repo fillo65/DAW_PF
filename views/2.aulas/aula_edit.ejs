@@ -12,7 +12,7 @@
         <label class="col-sm-4" for="name">Modulos</label>
         <select class="col-sm-6 custom-select" name="modules">
           <% cursos.forEach(function(reg){ %>
-            <% if(cursos.indexOf(String(reg._id))){ %>
+            <% if(String(reg._id) == String(data.modules._id)){ %>
               <option selected value="<%= reg._id %>"><%= reg.name %></option>
               <% }else{ %>
                 <option value="<%= reg._id %>"><%= reg.name %></option>
@@ -47,60 +47,57 @@
                           <div class="col-sm-12">
                             <select multiple id="custom-headers" class="searchable" name="alumnes[]">
                               <% users.forEach(function(reg){ %>
+                                <option value="<%= reg._id %>"><%= reg.name %> <%= reg.email %></option>
+                                <% }) %>
                                 <% data.alumnes.forEach(function(rex){ %>
-                                  <% if(rex.email == reg.email){ %>
-                                    <option selected value="<%= reg._id %>"><%= reg.name %> <%= reg.email %></option>
-                                    <% }else{ %>
-                                      <option value="<%= reg._id %>"><%= reg.name %> <%= reg.email %></option>
-                                      <% } %>
-                                      <% }) %>
-                                      <% }) %>
-                                    </select>
-                                  </div>
-                                </div>
-                                <div class="col-sm-6 push-sm-5">
-                                  <button type="submit" name="registrer">Guardar</button>
-                                </div>
-                              </form>
+                                  <option selected value="<%= rex._id %>"><%= rex.name %> <%= rex.email %></option>
+                                  <% }) %>
+                                </select>
+                              </div>
                             </div>
-                          </div>
-                          <script src="/js/bootstrap_v3.js" charset="utf-8"></script>
-                          <script src="/js/jquery.multi-select.js" charset="utf-8"></script>
-                          <script src="/js/jquery.quicksearch.js" charset="utf-8"></script>
-                          <script type="text/javascript">
-                          $('.searchable').multiSelect({
-                            selectableHeader: "<input type='text' class='search-input' autocomplete='off' placeholder='Filtro'>",
-                            selectionHeader: "<input type='text' class='search-input' autocomplete='off' placeholder='Filtro'>",
-                            afterInit: function(ms){
-                              var that = this,
-                              $selectableSearch = that.$selectableUl.prev(),
-                              $selectionSearch = that.$selectionUl.prev(),
-                              selectableSearchString = '#'+that.$container.attr('id')+' .ms-elem-selectable:not(.ms-selected)',
-                              selectionSearchString = '#'+that.$container.attr('id')+' .ms-elem-selection.ms-selected';
+                            <div class="col-sm-6 push-sm-5">
+                              <button type="submit" name="registrer">Guardar</button>
+                            </div>
+                          </form>
+                        </div>
+                      </div>
+                      <script src="/js/bootstrap_v3.js" charset="utf-8"></script>
+                      <script src="/js/jquery.multi-select.js" charset="utf-8"></script>
+                      <script src="/js/jquery.quicksearch.js" charset="utf-8"></script>
+                      <script type="text/javascript">
+                      $('.searchable').multiSelect({
+                        selectableHeader: "<input type='text' class='search-input' autocomplete='off' placeholder='Filtro'>",
+                        selectionHeader: "<input type='text' class='search-input' autocomplete='off' placeholder='Filtro'>",
+                        afterInit: function(ms){
+                          var that = this,
+                          $selectableSearch = that.$selectableUl.prev(),
+                          $selectionSearch = that.$selectionUl.prev(),
+                          selectableSearchString = '#'+that.$container.attr('id')+' .ms-elem-selectable:not(.ms-selected)',
+                          selectionSearchString = '#'+that.$container.attr('id')+' .ms-elem-selection.ms-selected';
 
-                              that.qs1 = $selectableSearch.quicksearch(selectableSearchString)
-                              .on('keydown', function(e){
-                                if (e.which === 40){
-                                  that.$selectableUl.focus();
-                                  return false;
-                                }
-                              });
-
-                              that.qs2 = $selectionSearch.quicksearch(selectionSearchString)
-                              .on('keydown', function(e){
-                                if (e.which == 40){
-                                  that.$selectionUl.focus();
-                                  return false;
-                                }
-                              });
-                            },
-                            afterSelect: function(){
-                              this.qs1.cache();
-                              this.qs2.cache();
-                            },
-                            afterDeselect: function(){
-                              this.qs1.cache();
-                              this.qs2.cache();
+                          that.qs1 = $selectableSearch.quicksearch(selectableSearchString)
+                          .on('keydown', function(e){
+                            if (e.which === 40){
+                              that.$selectableUl.focus();
+                              return false;
                             }
                           });
-                          </script>
+
+                          that.qs2 = $selectionSearch.quicksearch(selectionSearchString)
+                          .on('keydown', function(e){
+                            if (e.which == 40){
+                              that.$selectionUl.focus();
+                              return false;
+                            }
+                          });
+                        },
+                        afterSelect: function(){
+                          this.qs1.cache();
+                          this.qs2.cache();
+                        },
+                        afterDeselect: function(){
+                          this.qs1.cache();
+                          this.qs2.cache();
+                        }
+                      });
+                      </script>

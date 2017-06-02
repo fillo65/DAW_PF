@@ -22,6 +22,10 @@ module.exports = {
     let aulas = Aulas.find({}).deepPopulate('modules alumnes edition edition.Service profes');
     return aulas;
   },
+  findFive: function () {
+    let aulas = Aulas.find({}).deepPopulate('modules alumnes edition edition.Service profes').sort({'created_at': -1}).limit(5);
+    return aulas;
+  },
   updateData: function (reg, id) {
     var res = true;
     reg.updated_at = new Date();
