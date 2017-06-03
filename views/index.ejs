@@ -1,4 +1,5 @@
 <% layout('templates/principal') -%>
+<div class="container-fluid">
 <h5>Usuario Recientes</h5>
 <ul class="main__recent_users row">
   <% users.forEach(function(reg){ %>
@@ -11,4 +12,5 @@
     <li class=""><a href="/aulas/<%= reg._id %>"><%= reg.modules.name %></a></li>
     <% }) %>
   </ul>
+</div>
   <!-- <h2>calendar</h2> -->
