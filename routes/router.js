@@ -691,4 +691,8 @@ module.exports = function(app, passport){
       }
     });
   });
+  /*============================  6.propos ==============================*/
+  app.get('/propos', isLoggedIn, function(req, res) {
+    res.render('6.propose/propos.ejs');
+  });
 };

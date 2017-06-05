@@ -1,16 +1,59 @@
 <% layout('templates/principal') -%>
 <div class="container-fluid">
-<h5>Usuario Recientes</h5>
-<ul class="main__recent_users row">
-  <% users.forEach(function(reg){ %>
-    <li><a class="col-3" href="/users/profile/<%= reg._id %>"><svg class="lnr lnr-user"><use xlink:href="#lnr-user"></use></svg><%= reg.name %></a></li>
-    <% }) %>
-  </ul>
-<h5>Aulas Recientes</h5>
-<ul class="main__current_aulas">
-  <% data.forEach(function(reg){ %>
-    <li class=""><a href="/aulas/<%= reg._id %>"><%= reg.modules.name %></a></li>
-    <% }) %>
-  </ul>
-</div>
-  <!-- <h2>calendar</h2> -->
+  <div class="row">
+  <div class="col-lg-8">
+    <h4 class="page-main--addnew">Calendar</h4>
+    <link href='/css/fullcalendar.min.css' rel='stylesheet' />
+    <script src='/js/fullcalendar.min.js'></script>
+    <div class="cal">
+      <div id='calendar'></div>
+    </div>
+    <script>
+
+    $(document).ready(function() {
+
+      $('#calendar').fullCalendar({
+        header: {
+          left: 'prev today',
+          center: 'title',
+          right: 'next',
+        },
+        editable: true,
+        aspectRatio: 1.5,
+        navLinks: true, // can click day/week names to navigate views
+        eventLimit: true, // allow "more" link when too many events
+        events: {
+          url: 'php/get-events.php',
+          error: function() {
+            $('#script-warning').show();
+          }
+        },
+        loading: function(bool) {
+          $('#loading').toggle(bool);
+        }
+      });
+
+    });
+
+    </script>
+  </div>
+  <div class="col-lg-4">
+      <!-- <hr> -->
+      <h5>Aulas Recientes</h5>
+      <ul class="main__current_aulas">
+        <% data.forEach(function(reg){ %>
+          <li class=""><a href="/aulas/<%= reg._id %>"><%= reg.modules.name %></a></li>
+          <% }) %>
+        </ul>
+      </div>
+      <div class="col-12">
+        <hr>
+        <h5>Usuario Recientes</h5>
+        <ul class="main__recent_users row">
+          <% users.forEach(function(reg){ %>
+            <li><a class="col-3" href="/users/profile/<%= reg._id %>"><svg class="lnr lnr-user"><use xlink:href="#lnr-user"></use></svg><%= reg.name %></a></li>
+            <% }) %>
+          </ul>
+      </div>
+    </div>
+    </div>

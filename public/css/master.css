@@ -145,12 +145,19 @@ main {
   padding-left: 60px;
   padding-top: 15px;
   margin-top: 78px; }
+  main .cal .fc-scroller {
+    overflow-y: hidden !important; }
+  main .cal .fc-toolbar.fc-header-toolbar {
+    font-size: 13px; }
+    main .cal .fc-toolbar.fc-header-toolbar .fc-center h2 {
+      font-size: 22px !important; }
   main .main__current_aulas {
     list-style: none;
     padding: 0px;
     margin-top: 5px;
     display: flex;
     flex-wrap: wrap;
+    font-size: 16px;
     /*mod*/ }
     main .main__current_aulas li {
       padding: 0px;
