@@ -4,6 +4,7 @@ module.exports = {
   saveData: function (data) {
     var userData = new User(data);
     userData.password = userData.generateHash(data.password);
+    // console.log(userData.password);
     var res = true;
     userData.save(function (err) {
       if (err) {
