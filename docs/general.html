@@ -3,33 +3,75 @@
 <head>
   <meta charset="utf-8">
   <title>General Doc</title>
+  <link rel="stylesheet" href="../public/css/bootstrap.min.css">
 </head>
 <body>
-  <hr>
-  <h3>Bases de datos Relacionales vs NoSql </h3>
-  <h6>Relaciones</h6>
-  <!-- SQL -->
-Population is the process of automatically replacing the specified paths in the document with document(s) from other collection(s). We may populate a single document, multiple documents, plain object, multiple plain objects, or all objects returned from a query.
-  <!-- NoSQL -->
-  <pre>
-    var schema = new db.Schema({
-      name: String,
-      price: Number,
-      type: String,
-      modules: [db.SchemaRefenrece.ObjectId],
-      created_at: Timestamp
-    });
-  </pre>
-  <hr>
-  <h1>Datos y enrutamiento</h1>
-  <p>La importancia de diferenciar entre Cosas que hacer en el codigo, y cosas que hacer en el entorno</p>
-  <h3>Cosas que hacer en el codigo</h3>
-  <ul>
-    <li>
-      <dl>
-        <dt>gzip compression</dt>
-      </dl>
-    </li>
-  </ul>
+  <div class="container">
+
+    <h1>Observaciones generales</h1>
+    <p>La importancia de diferenciar entre Cosas que hacer en el codigo, y cosas que hacer en el entorno</p>
+    <hr>
+    <h3>Promesas!</h3>
+    <div class="row">
+      <pre class="col-6">
+        ---- api_sql File ----
+        getUsersByAula: function(id){
+          return new Promise(function(resolve, reject) {
+            var con = mysql.createConnection({
+              host: "localhost",
+              user: "root",
+              password: "",
+              database: "test"
+            });
+            con.query('SELECT * FROM test',function(err,rows){
+              if(err) {
+                return reject(err);
+              }
+              resolve(rows);
+            });
+
+          });
+        },
+      </pre>
+      <pre  class="col-6">
+        ---- Router File ----
+        let apiSql = require("../config/api_sql.js");
+        apiSql.getUsersByAula(result.moodleId).then(function(rows){
+          res.render("2.aulas/aula_sync", {data:result, external: rows});
+        }).catch(function(err) {
+          console.log(err);
+        });
+      </pre>
+    </div>
+    <hr>
+    <h3>Bases de datos Relacionales vs NoSql </h3>
+    <h6>Relaciones</h6>
+    <!-- SQL -->
+    Population is the process of automatically replacing the specified paths in the document with document(s) from other collection(s). We may populate a single document, multiple documents, plain object, multiple plain objects, or all objects returned from a query.
+    <!-- NoSQL -->
+    <div class="row">
+      <pre class="col-6">
+        ------ Schema declaration ----
+        var ediciones = new db.Schema({
+          name: String,
+          price: Number,
+          type: String,
+          modules: [db.SchemaRefenrece.ObjectId ref:'Services'],
+          created_at: Timestamp
+        });
+      </pre>
+      <pre class="col-6">
+        ------ Populate query ----
+        findById: function (id) {
+          return ediciones.findById({_id: id}).populate('Service');
+        },
+        ------ deepPopulate Mongoose query ----
+        findById: function (id) {
+          let aulas = Aulas.findById({_id: id}).deepPopulate('modules alumnes edition edition.Service profes');
+          return aulas;
+        },
+      </pre>
+    </div>
+  </div>
 </body>
 </html>
